@@ -1,0 +1,167 @@
+#define F_CPU 16000000
+#include <avr/io.h>
+#include <util/delay.h>
+#include <stdio.h>
+#include "Utils/UART.h"
+#include "Utils/I2C.h"
+#include "Utils/SDC30.h"
+
+// SCD30 adressen er 0x61. står i interface databladet
+#define SLAVE_ADDRESS 0x61
+
+void float_to_string(char* buffer, float value) {
+	int integerPart = (int)value;
+	int decimalPart = (int)((value - integerPart) * 100);
+	
+	sprintf(buffer, "%d.%02d", integerPart, decimalPart);
+};
+
+int main(void) {
+	// Initialize I2C
+	I2C i2c;
+	UART uart;
+	
+	uint8_t slave_address = 0x61;
+	// write adress er med 0 i lsb.
+	uint8_t write_address = SLAVE_ADDRESS << 1;
+	// read adress er med 1 i lsb.
+	uint8_t read_address = (SLAVE_ADDRESS << 1) | 0x01;
+	
+	char buffer_co2[4];
+	char buffer_temp[4];
+	char buffer_humidity[4];
+	
+	uint8_t dataReadyMSB;
+	uint8_t dataReadyLSB;
+	uint16_t dataReady;
+	char buffer_dataready[2];
+
+	uint8_t co2_mmsb;
+	uint8_t co2_mlsb;
+	uint8_t co2_lmsb;
+	uint8_t co2_llsb;
+	
+	uint8_t t_mmsb;
+	uint8_t t_mlsb;
+	uint8_t t_lmsb;
+	uint8_t t_llsb;
+
+	uint8_t h_mmsb;
+	uint8_t h_mlsb;
+	uint8_t h_lmsb;
+	uint8_t h_llsb;
+	
+	union {
+		uint8_t bytes[4];
+		float value;
+	} co2_union;
+	
+	union {
+		uint8_t bytes[4];
+		float value;
+	} temp_union;
+	
+	union {
+		uint8_t bytes[4];
+		float value;
+	} humidity_union;
+	
+	while(true) {
+		
+		do {
+			i2c.start();
+			i2c.write(write_address);
+			i2c.write(0x02);
+			i2c.write(0x02);
+			i2c.stop();
+			
+			_delay_ms(50);
+			
+			i2c.start();
+			i2c.write(read_address);
+			dataReadyMSB = i2c.read_ack();
+			dataReadyLSB = i2c.read_nack();
+			
+			dataReady = ((uint16_t)dataReadyMSB << 8) | (uint16_t)dataReadyLSB;
+			
+			uart.transmitString("\r\nDataReady:");
+			sprintf(buffer_dataready, "%d", dataReady);
+			uart.transmitString(buffer_dataready);
+			
+			i2c.stop();
+			
+			_delay_ms(1000);
+			
+		} while (dataReady != 1);
+
+		i2c.start();
+		i2c.write(write_address);
+		
+		// Read measurement adresse er 0x0300;
+		i2c.write(0x03);
+		i2c.write(0x00);
+
+		i2c.stop();
+		
+		_delay_ms(50);
+		
+		i2c.start();
+		i2c.write(read_address);
+
+		// Read data and send NACK
+		co2_mmsb = i2c.read_ack();
+		co2_mlsb = i2c.read_ack();
+		i2c.read_ack(); // CRC
+		co2_lmsb = i2c.read_ack();
+		co2_llsb = i2c.read_ack();
+		i2c.read_ack(); // CRC
+		t_mmsb = i2c.read_ack();
+		t_mlsb = i2c.read_ack();
+		i2c.read_ack(); // CRC
+		t_lmsb = i2c.read_ack();
+		t_llsb = i2c.read_ack();
+		i2c.read_ack(); // CRC
+		h_mmsb = i2c.read_ack();
+		h_mlsb = i2c.read_ack();
+		i2c.read_ack(); // CRC
+		h_lmsb = i2c.read_ack();
+		h_llsb = i2c.read_ack();
+		i2c.read_nack(); // CRC
+
+		// Send stop condition
+		i2c.stop();
+		
+		co2_union.bytes[3] = co2_mmsb;
+		co2_union.bytes[2] = co2_mlsb;
+		co2_union.bytes[1] = co2_lmsb;
+		co2_union.bytes[0] = co2_llsb;
+		
+		float co2_as_float = co2_union.value;
+		uart.transmitString("\r\nCo2:    ");
+		float_to_string(buffer_co2, co2_as_float);
+		uart.transmitString(buffer_co2);
+		
+		temp_union.bytes[3] = t_mmsb;
+		temp_union.bytes[2] = t_mlsb;
+		temp_union.bytes[1] = t_lmsb;
+		temp_union.bytes[0] = t_llsb;
+		
+		float temp_as_float= temp_union.value;
+		uart.transmitString("\r\nTemp:    ");
+		float_to_string(buffer_temp, temp_as_float);
+		uart.transmitString(buffer_temp);
+		
+		humidity_union.bytes[3] = h_mmsb;
+		humidity_union.bytes[2] = h_mlsb;
+		humidity_union.bytes[1] = h_lmsb;
+		humidity_union.bytes[0] = h_llsb;
+		
+		float humidity_as_float = humidity_union.value;
+		uart.transmitString("\r\nHumidity: ");
+		float_to_string(buffer_humidity, humidity_as_float);
+		uart.transmitString(buffer_humidity);
+		
+		_delay_ms(1000);
+		//while(uart.recieve() != 'v') {}
+	}
+}
