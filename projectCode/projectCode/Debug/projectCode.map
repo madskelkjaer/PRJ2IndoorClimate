@@ -443,9 +443,9 @@ END GROUP
  .text._ZN5SDC3011getHumidityEv
                 0x0000037a        0xc Utils/SDC30.o
                 0x0000037a                _ZN5SDC3011getHumidityEv
- .text._ZN5SDC3012startMeasureEv
+ .text._ZN5SDC307MeasureEv
                 0x00000386      0x154 Utils/SDC30.o
-                0x00000386                _ZN5SDC3012startMeasureEv
+                0x00000386                _ZN5SDC307MeasureEv
  .text._ZN4UARTC2Ev
                 0x000004da       0x12 Utils/UART.o
                 0x000004da                _ZN4UARTC1Ev
@@ -664,13 +664,13 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x20ee
+.debug_info     0x00000000     0x20e3
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0xbbc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_info    0x00000bbc      0x64c main.o
  .debug_info    0x00001208      0x259 Utils/I2C.o
- .debug_info    0x00001461      0x9d1 Utils/SDC30.o
- .debug_info    0x00001e32      0x2bc Utils/UART.o
+ .debug_info    0x00001461      0x9c6 Utils/SDC30.o
+ .debug_info    0x00001e27      0x2bc Utils/UART.o
 
 .debug_abbrev   0x00000000     0x12b7
  *(.debug_abbrev)
@@ -680,13 +680,13 @@ END GROUP
  .debug_abbrev  0x00000e48      0x2b0 Utils/SDC30.o
  .debug_abbrev  0x000010f8      0x1bf Utils/UART.o
 
-.debug_line     0x00000000      0x89f
+.debug_line     0x00000000      0x8a0
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1fa C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_line    0x000001fa      0x159 main.o
  .debug_line    0x00000353      0x165 Utils/I2C.o
- .debug_line    0x000004b8      0x2da Utils/SDC30.o
- .debug_line    0x00000792      0x10d Utils/UART.o
+ .debug_line    0x000004b8      0x2db Utils/SDC30.o
+ .debug_line    0x00000793      0x10d Utils/UART.o
 
 .debug_frame    0x00000000      0x2b0
  *(.debug_frame)
@@ -695,16 +695,16 @@ END GROUP
  .debug_frame   0x00000108      0x108 Utils/SDC30.o
  .debug_frame   0x00000210       0xa0 Utils/UART.o
 
-.debug_str      0x00000000      0x997
+.debug_str      0x00000000      0x982
  *(.debug_str)
  .debug_str     0x00000000      0x3e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_str     0x000003e6      0x423 main.o
-                                0x462 (size before relaxing)
- .debug_str     0x00000809       0x27 Utils/I2C.o
+ .debug_str     0x000003e6      0x41e main.o
+                                0x457 (size before relaxing)
+ .debug_str     0x00000804       0x27 Utils/I2C.o
                                 0x238 (size before relaxing)
- .debug_str     0x00000830      0x129 Utils/SDC30.o
-                                0x469 (size before relaxing)
- .debug_str     0x00000959       0x3e Utils/UART.o
+ .debug_str     0x0000082b      0x119 Utils/SDC30.o
+                                0x44e (size before relaxing)
+ .debug_str     0x00000944       0x3e Utils/UART.o
                                 0x277 (size before relaxing)
 
 .debug_loc      0x00000000      0x959

@@ -5,7 +5,11 @@
 * Author: madse
 */
 
+#define F_CPU 16000000
+#include <avr/io.h>
+#include <util/delay.h>
 #include "SDC30.h"
+
 
 SDC30::SDC30(uint8_t address)
 {
@@ -60,7 +64,7 @@ float SDC30::getHumidity()
 	return data_.humidity;
 }
 
-void SDC30::startMeasure()
+void SDC30::Measure()
 {
 	dataArray data;
 	measurementData mData;
@@ -68,9 +72,7 @@ void SDC30::startMeasure()
 	uint8_t co2_mmsb, co2_mlsb, co2_lmsb, co2_llsb;
 	uint8_t t_mmsb, t_mlsb, t_lmsb, t_llsb;
 	uint8_t h_mmsb, h_mlsb, h_lmsb, h_llsb;
-	
-	float temp_data_float;
-	
+		
 	while(!this->ready()) {}
 	
 	i2c_.start();
@@ -81,12 +83,12 @@ void SDC30::startMeasure()
 
 	i2c_.stop();
 	
-	_delay_ms(50);
+	_delay_ms(50); // Afventer sensor i 50ms.
 	
 	i2c_.start();
 	i2c_.write(readAddress_);
 
-	// Read data and send NACK
+	// Læser data ifølge databladet.
 	co2_mmsb = i2c_.read_ack();
 	co2_mlsb = i2c_.read_ack();
 	i2c_.read_ack(); // CRC

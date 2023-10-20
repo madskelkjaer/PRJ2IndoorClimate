@@ -24,8 +24,8 @@ int main(void) {
 	float float_number;
 
 	while(true) {
-		sdc30.startMeasure();
-				
+		sdc30.Measure();
+		
 		float_number = sdc30.getCo2();
 		uart.transmitString("\r\nC2:    ");
 		float_to_string(buffer_string, float_number);

@@ -8,9 +8,7 @@
 
 #ifndef __SDC30_H__
 #define __SDC30_H__
-#define F_CPU 16000000
-#include <avr/io.h>
-#include <util/delay.h>
+
 #include "I2C.h"
 
 struct dataArray 
@@ -30,7 +28,7 @@ class SDC30
 public:
 	SDC30(uint8_t address);
 	bool ready();
-	void startMeasure();
+	void Measure();
 	float getCo2();
 	float getTemperature();
 	float getHumidity();

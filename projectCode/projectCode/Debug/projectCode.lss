@@ -13,19 +13,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   4 .debug_aranges 000000f8  00000000  00000000  00000f2c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000020ee  00000000  00000000  00001024  2**0
+  5 .debug_info   000020e3  00000000  00000000  00001024  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000012b7  00000000  00000000  00003112  2**0
+  6 .debug_abbrev 000012b7  00000000  00000000  00003107  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000089f  00000000  00000000  000043c9  2**0
+  7 .debug_line   000008a0  00000000  00000000  000043be  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000002b0  00000000  00000000  00004c68  2**2
+  8 .debug_frame  000002b0  00000000  00000000  00004c60  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000997  00000000  00000000  00004f18  2**0
+  9 .debug_str    00000982  00000000  00000000  00004f10  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000959  00000000  00000000  000058af  2**0
+ 10 .debug_loc    00000959  00000000  00000000  00005892  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000000b8  00000000  00000000  00006208  2**0
+ 11 .debug_ranges 000000b8  00000000  00000000  000061eb  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -281,11 +281,11 @@ int main(void) {
 	float float_number;
 
 	while(true) {
-		sdc30.startMeasure();
+		sdc30.Measure();
  1b8:	ce 01       	movw	r24, r28
  1ba:	02 96       	adiw	r24, 0x02	; 2
- 1bc:	e4 d0       	rcall	.+456    	; 0x386 <_ZN5SDC3012startMeasureEv>
-				
+ 1bc:	e4 d0       	rcall	.+456    	; 0x386 <_ZN5SDC307MeasureEv>
+		
 		float_number = sdc30.getCo2();
  1be:	ce 01       	movw	r24, r28
  1c0:	02 96       	adiw	r24, 0x02	; 2
@@ -471,10 +471,10 @@ uint8_t I2C::read_nack() {
  2a6:	08 95       	ret
 
 000002a8 <_ZN5SDC30C1Eh>:
-* Author: madse
-*/
-
+#include <avr/io.h>
+#include <util/delay.h>
 #include "SDC30.h"
+
 
 SDC30::SDC30(uint8_t address)
  2a8:	ff 92       	push	r15
@@ -654,9 +654,9 @@ float SDC30::getHumidity()
 }
  384:	08 95       	ret
 
-00000386 <_ZN5SDC3012startMeasureEv>:
+00000386 <_ZN5SDC307MeasureEv>:
 
-void SDC30::startMeasure()
+void SDC30::Measure()
 {
  386:	2f 92       	push	r2
  388:	3f 92       	push	r3
@@ -685,16 +685,16 @@ void SDC30::startMeasure()
  3b6:	0f be       	out	0x3f, r0	; 63
  3b8:	cd bf       	out	0x3d, r28	; 61
  3ba:	7c 01       	movw	r14, r24
+	
+	uint8_t co2_mmsb, co2_mlsb, co2_lmsb, co2_llsb;
 	uint8_t t_mmsb, t_mlsb, t_lmsb, t_llsb;
 	uint8_t h_mmsb, h_mlsb, h_lmsb, h_llsb;
-	
-	float temp_data_float;
-	
+		
 	while(!this->ready()) {}
  3bc:	c7 01       	movw	r24, r14
  3be:	96 df       	rcall	.-212    	; 0x2ec <_ZN5SDC305readyEv>
  3c0:	88 23       	and	r24, r24
- 3c2:	e1 f3       	breq	.-8      	; 0x3bc <_ZN5SDC3012startMeasureEv+0x36>
+ 3c2:	e1 f3       	breq	.-8      	; 0x3bc <_ZN5SDC307MeasureEv+0x36>
 	
 	i2c_.start();
  3c4:	87 01       	movw	r16, r14
@@ -726,11 +726,11 @@ void SDC30::startMeasure()
  3ec:	f1 50       	subi	r31, 0x01	; 1
  3ee:	20 40       	sbci	r18, 0x00	; 0
  3f0:	80 40       	sbci	r24, 0x00	; 0
- 3f2:	e1 f7       	brne	.-8      	; 0x3ec <_ZN5SDC3012startMeasureEv+0x66>
- 3f4:	00 c0       	rjmp	.+0      	; 0x3f6 <_ZN5SDC3012startMeasureEv+0x70>
+ 3f2:	e1 f7       	brne	.-8      	; 0x3ec <_ZN5SDC307MeasureEv+0x66>
+ 3f4:	00 c0       	rjmp	.+0      	; 0x3f6 <_ZN5SDC307MeasureEv+0x70>
  3f6:	00 00       	nop
 	
-	_delay_ms(50);
+	_delay_ms(50); // Afventer sensor i 50ms.
 	
 	i2c_.start();
  3f8:	c8 01       	movw	r24, r16
@@ -741,7 +741,7 @@ void SDC30::startMeasure()
  400:	c8 01       	movw	r24, r16
  402:	34 df       	rcall	.-408    	; 0x26c <_ZN3I2C5writeEh>
 
-	// Read data and send NACK
+	// Læser data ifølge databladet.
 	co2_mmsb = i2c_.read_ack();
  404:	c8 01       	movw	r24, r16
  406:	3c df       	rcall	.-392    	; 0x280 <_ZN3I2C8read_ackEv>
