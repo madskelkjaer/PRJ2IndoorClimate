@@ -2,46 +2,12 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdio.h>
-#include "Utils/UART.h"
-#include "Utils/I2C.h"
-#include "Utils/SDC30.h"
+#include "Utils/SODA.h"
 
-// SCD30 adressen er 0x61. står i interface databladet
-#define SLAVE_ADDRESS 0x61
-
-void float_to_string(char* buffer, float value) {
-	int integerPart = (int)value;
-	int decimalPart = (int)((value - integerPart) * 100);
+int main(void)
+{
+	SODA dataCollector;
 	
-	sprintf(buffer, "%d.%02d", integerPart, decimalPart);
-};
-
-int main(void) {
-	UART uart;
-	SDC30 sdc30(SLAVE_ADDRESS);
-	
-	char buffer_string[4];
-	float float_number;
-
-	while(true) {
-		sdc30.Measure();
-		
-		float_number = sdc30.getCo2();
-		uart.transmitString("\r\nC2:    ");
-		float_to_string(buffer_string, float_number);
-		uart.transmitString(buffer_string);
-		
-		float_number = sdc30.getTemperature();
-		uart.transmitString("\r\nTE:    ");
-		float_to_string(buffer_string, float_number);
-		uart.transmitString(buffer_string);
-		
-		float_number = sdc30.getHumidity();
-		uart.transmitString("\r\nHU:    ");
-		float_to_string(buffer_string, float_number);
-		uart.transmitString(buffer_string);
-		
-		// _delay_ms(1000);
-		while(uart.recieve() != 'v') {}
-	}
+	dataCollector.setInterval(1);
+	dataCollector.start();
 }

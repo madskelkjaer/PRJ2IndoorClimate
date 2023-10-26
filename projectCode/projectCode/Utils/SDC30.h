@@ -18,7 +18,8 @@ struct dataArray
 	float humidity;	
 };
 
-union measurementData {
+union measurementData 
+{
 	uint8_t bytes[4];
 	float value;
 };
@@ -28,7 +29,7 @@ class SDC30
 public:
 	SDC30(uint8_t address);
 	bool ready();
-	void Measure();
+	void measure();
 	float getCo2();
 	float getTemperature();
 	float getHumidity();

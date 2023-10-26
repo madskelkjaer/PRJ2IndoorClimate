@@ -21,7 +21,8 @@ UART::UART()
 	UCSR0B = (1 << RXEN0) | (1 << TXEN0);
 }
 
-void UART::transmit(unsigned char data) {
+void UART::transmit(unsigned char data) 
+{
 	// Wait for empty transmit buffer
 	while (!(UCSR0A & (1 << UDRE0)));
 
@@ -29,7 +30,8 @@ void UART::transmit(unsigned char data) {
 	UDR0 = data;
 }
 
-void UART::transmitString(const char *str) {
+void UART::transmitString(const char *str) 
+{
 	// Transmit each character in the string
 	while (*str) {
 		this->transmit(*str);
@@ -37,7 +39,8 @@ void UART::transmitString(const char *str) {
 	}
 }
 
-unsigned char UART::recieve() {
+unsigned char UART::recieve() 
+{
 	// Wait for data to be received
 	while (!(UCSR0A & (1 << RXC0)));
 	
@@ -45,7 +48,8 @@ unsigned char UART::recieve() {
 	return UDR0;
 }
 
-void UART::recieveString(char* buffer, int length) {
+void UART::recieveString(char* buffer, int length) 
+{
 	int index = 0;
 	char receivedChar;
 	do {

@@ -177,12 +177,12 @@ Disassembly of section .text:
  112:	76 cf       	rjmp	.-276    	; 0x0 <__vectors>
 
 00000114 <_Z15float_to_stringPcf>:
-#include "Utils/SDC30.h"
 
 // SCD30 adressen er 0x61. står i interface databladet
 #define SLAVE_ADDRESS 0x61
 
-void float_to_string(char* buffer, float value) {
+void float_to_string(char* buffer, float value) 
+{
  114:	8f 92       	push	r8
  116:	9f 92       	push	r9
  118:	af 92       	push	r10
@@ -256,7 +256,8 @@ void float_to_string(char* buffer, float value) {
 
 00000196 <main>:
 
-int main(void) {
+int main(void) 
+{
  196:	cf 93       	push	r28
  198:	df 93       	push	r29
  19a:	cd b7       	in	r28, 0x3d	; 61
@@ -276,11 +277,11 @@ int main(void) {
  1b2:	ce 01       	movw	r24, r28
  1b4:	02 96       	adiw	r24, 0x02	; 2
  1b6:	78 d0       	rcall	.+240    	; 0x2a8 <_ZN5SDC30C1Eh>
-	
 	char buffer_string[4];
 	float float_number;
 
-	while(true) {
+	while(true) 
+	{
 		sdc30.Measure();
  1b8:	ce 01       	movw	r24, r28
  1ba:	02 96       	adiw	r24, 0x02	; 2
@@ -391,7 +392,8 @@ I2C::I2C()
 00000254 <_ZN3I2C5startEv>:
 } //I2C
 
-void I2C::start() {
+void I2C::start()
+{
 	// Send start condition
 	TWCR = (1 << TWSTA) | (1 << TWEN) | (1 << TWINT);
  254:	84 ea       	ldi	r24, 0xA4	; 164
@@ -405,7 +407,8 @@ void I2C::start() {
 
 00000264 <_ZN3I2C4stopEv>:
 
-void I2C::stop() {
+void I2C::stop()
+{
 	// Send stop condition
 	TWCR = (1 << TWSTO) | (1 << TWEN) | (1 << TWINT);
  264:	84 e9       	ldi	r24, 0x94	; 148
@@ -415,7 +418,8 @@ void I2C::stop() {
 0000026c <_ZN3I2C5writeEh>:
 }
 
-void I2C::write(uint8_t data) {
+void I2C::write(uint8_t data)
+{
 	// Load data into TWI data register
 	TWDR = data;
  26c:	60 93 bb 00 	sts	0x00BB, r22	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7c00bb>
@@ -435,7 +439,8 @@ void I2C::write(uint8_t data) {
 
 00000280 <_ZN3I2C8read_ackEv>:
 
-uint8_t I2C::read_ack() {
+uint8_t I2C::read_ack()
+{
 	// Enable TWI, generation of ack and clear interrupt flag
 	TWCR = (1 << TWEN) | (1 << TWINT) | (1 << TWEA);
  280:	84 ec       	ldi	r24, 0xC4	; 196
@@ -454,7 +459,8 @@ uint8_t I2C::read_ack() {
 
 00000294 <_ZN3I2C9read_nackEv>:
 
-uint8_t I2C::read_nack() {
+uint8_t I2C::read_nack()
+{
 	// Enable TWI and clear interrupt flag
 	TWCR = (1 << TWEN) | (1 << TWINT);
  294:	84 e8       	ldi	r24, 0x84	; 132
@@ -913,7 +919,8 @@ void SDC30::Measure()
 000004ec <_ZN4UART8transmitEh>:
 }
 
-void UART::transmit(unsigned char data) {
+void UART::transmit(unsigned char data) 
+{
 	// Wait for empty transmit buffer
 	while (!(UCSR0A & (1 << UDRE0)));
  4ec:	80 91 c0 00 	lds	r24, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7c00c0>
@@ -928,7 +935,8 @@ void UART::transmit(unsigned char data) {
 000004fa <_ZN4UART14transmitStringEPKc>:
 }
 
-void UART::transmitString(const char *str) {
+void UART::transmitString(const char *str) 
+{
  4fa:	0f 93       	push	r16
  4fc:	1f 93       	push	r17
  4fe:	cf 93       	push	r28
@@ -945,10 +953,10 @@ void UART::transmitString(const char *str) {
  50e:	ee df       	rcall	.-36     	; 0x4ec <_ZN4UART8transmitEh>
 		str++;
  510:	21 96       	adiw	r28, 0x01	; 1
-	UDR0 = data;
 }
 
-void UART::transmitString(const char *str) {
+void UART::transmitString(const char *str) 
+{
 	// Transmit each character in the string
 	while (*str) {
  512:	f9 cf       	rjmp	.-14     	; 0x506 <_ZN4UART14transmitStringEPKc+0xc>
@@ -964,7 +972,8 @@ void UART::transmitString(const char *str) {
 
 0000051e <_ZN4UART7recieveEv>:
 
-unsigned char UART::recieve() {
+unsigned char UART::recieve() 
+{
 	// Wait for data to be received
 	while (!(UCSR0A & (1 << RXC0)));
  51e:	80 91 c0 00 	lds	r24, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7c00c0>

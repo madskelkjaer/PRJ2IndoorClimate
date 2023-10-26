@@ -64,7 +64,7 @@ float SDC30::getHumidity()
 	return data_.humidity;
 }
 
-void SDC30::Measure()
+void SDC30::measure()
 {
 	dataArray data;
 	measurementData mData;

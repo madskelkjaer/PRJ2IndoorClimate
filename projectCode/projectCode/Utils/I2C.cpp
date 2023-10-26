@@ -18,18 +18,21 @@ I2C::I2C()
 	TWBR = ((F_CPU / 100000) - 16) / 2;
 } //I2C
 
-void I2C::start() {
+void I2C::start()
+{
 	// Send start condition
 	TWCR = (1 << TWSTA) | (1 << TWEN) | (1 << TWINT);
 	while (!(TWCR & (1 << TWINT)));
 }
 
-void I2C::stop() {
+void I2C::stop()
+{
 	// Send stop condition
 	TWCR = (1 << TWSTO) | (1 << TWEN) | (1 << TWINT);
 }
 
-void I2C::write(uint8_t data) {
+void I2C::write(uint8_t data)
+{
 	// Load data into TWI data register
 	TWDR = data;
 
@@ -40,7 +43,8 @@ void I2C::write(uint8_t data) {
 	while (!(TWCR & (1 << TWINT)));
 }
 
-uint8_t I2C::read_ack() {
+uint8_t I2C::read_ack()
+{
 	// Enable TWI, generation of ack and clear interrupt flag
 	TWCR = (1 << TWEN) | (1 << TWINT) | (1 << TWEA);
 
@@ -50,7 +54,8 @@ uint8_t I2C::read_ack() {
 	return TWDR;
 }
 
-uint8_t I2C::read_nack() {
+uint8_t I2C::read_nack()
+{
 	// Enable TWI and clear interrupt flag
 	TWCR = (1 << TWEN) | (1 << TWINT);
 

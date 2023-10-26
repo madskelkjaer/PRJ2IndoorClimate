@@ -156,10 +156,13 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="main.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="testing_code.txt">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="main.cpp">
+    <Compile Include="main1.txt">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Utils\I2C.cpp">
@@ -172,6 +175,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Utils\SDC30.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Utils\SODA.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Utils\SODA.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Utils\UART.cpp">
