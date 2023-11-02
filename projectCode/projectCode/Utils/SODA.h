@@ -26,8 +26,8 @@ public:
 	
 private:
 	uint8_t collectionInterval_;
-	UART uart_;
 	SDC30 sdc30_;
+	UART uart_;
 	double co2_;
 	double temperature_;
 	double humidity_;

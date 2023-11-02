@@ -12,7 +12,9 @@
 #define SLAVE_ADDRESS 0x61
 
 // default constructor
-SODA::SODA() : sdc30_(SLAVE_ADDRESS), uart_()
+SODA::SODA() :
+	sdc30_(SLAVE_ADDRESS), uart_(),
+	co2_(0), temperature_(0), humidity_(0)
 {
 	SDC30 sdc(SLAVE_ADDRESS);
 	sdc30_ = sdc;
@@ -46,11 +48,26 @@ void SODA::setInterval(uint8_t intervalMinutes)
 
 void SODA::collectData()
 {
-	sdc30_.measure();
+	uint8_t numAverage = 3;
 	
-	co2_ = sdc30_.getCo2();
-	temperature_ = sdc30_.getTemperature();
-	humidity_ = sdc30_.getHumidity();
+	double co2_sum = 0;
+	double temp_sum = 0;
+	double hum_sum = 0;
+	
+	for (uint8_t i = 0; i < numAverage; i++)
+	{
+		sdc30_.measure();
+		co2_sum += sdc30_.getCo2();
+		temp_sum += sdc30_.getTemperature();
+		hum_sum += sdc30_.getHumidity();
+		
+		_delay_ms(100); // 100ms imellem hver måling.
+	}
+	
+	co2_ = co2_sum / numAverage;
+	temperature_ = temp_sum / numAverage;
+	humidity_ = hum_sum / numAverage;
+	
 }
 
 void SODA::printData()
