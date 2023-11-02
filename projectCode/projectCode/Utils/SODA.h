@@ -22,15 +22,15 @@ public:
 	void start();
 	void setInterval(uint8_t intervalMinutes);
 	void collectData();
-	void printData() const;
+	void printData();
 	
 private:
 	uint8_t collectionInterval_;
 	UART uart_;
 	SDC30 sdc30_;
-	float co2_;
-	float temperature_;
-	float humidity_;
+	double co2_;
+	double temperature_;
+	double humidity_;
 	
 }; //SODA
 

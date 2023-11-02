@@ -30,9 +30,9 @@ public:
 	SDC30(uint8_t address);
 	bool ready();
 	void measure();
-	float getCo2();
-	float getTemperature();
-	float getHumidity();
+	double getCo2();
+	double getTemperature();
+	double getHumidity();
 private:
 	dataArray data_;
 	uint8_t address_;

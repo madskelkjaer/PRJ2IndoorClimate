@@ -49,17 +49,17 @@ bool SDC30::ready()
 	return dataReady == 1; // Hvis dataReady er 1, returner true.
 }
 
-float SDC30::getCo2()
+double SDC30::getCo2()
 {
 	return data_.co2;
 }
 
-float SDC30::getTemperature()
+double SDC30::getTemperature()
 {
 	return data_.temperature;
 }
 
-float SDC30::getHumidity()
+double SDC30::getHumidity()
 {
 	return data_.humidity;
 }

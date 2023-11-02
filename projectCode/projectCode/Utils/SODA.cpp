@@ -12,13 +12,15 @@
 #define SLAVE_ADDRESS 0x61
 
 // default constructor
-SODA::SODA()
+SODA::SODA() : sdc30_(SLAVE_ADDRESS), uart_()
 {
 	SDC30 sdc(SLAVE_ADDRESS);
 	sdc30_ = sdc;
 	
 	UART uart;
 	uart_ = uart;
+	
+	// default collection_interval
 } //SODA
 
 void SODA::start()
@@ -28,7 +30,12 @@ void SODA::start()
 		collectData();
 		printData();
 
-		_delay_ms(collectionInterval_ * 60000);
+		uint8_t intervalInMinutes = collectionInterval_ * 60000;
+
+		for (uint8_t i=1; i<intervalInMinutes; i++)
+		{
+			_delay_ms(1);
+		}
 	}
 }
 
@@ -46,7 +53,7 @@ void SODA::collectData()
 	humidity_ = sdc30_.getHumidity();
 }
 
-void SODA::printData() const
+void SODA::printData()
 {
 	char buffer[100];
 	sprintf(buffer, "C: %.2f T: %.2f H: %.2f", co2_, temperature_, humidity_);
