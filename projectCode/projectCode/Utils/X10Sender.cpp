@@ -47,6 +47,9 @@ X10Sender::~X10Sender()
 
 void X10Sender::sendData(char command, uint8_t address[4])
 {
+	if (dataReady_) return; // Hvis der allerede er data, skal der ikke sendes en kommando.
+	
+	
 	// Første 4 bits er for at melde ud af der er en besked på vej.
 	const int PROTOCOL_START = 0;
 	// de efterfølgende 4 bits er adressen på enheden vi vil snakke til.
