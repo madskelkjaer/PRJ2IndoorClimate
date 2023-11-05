@@ -13,15 +13,15 @@
 
 struct dataArray 
 {
-	float co2;
-	float temperature;
-	float humidity;	
+	double co2;
+	double temperature;
+	double humidity;	
 };
 
 union measurementData 
 {
 	uint8_t bytes[4];
-	float value;
+	double value;
 };
 
 class SDC30

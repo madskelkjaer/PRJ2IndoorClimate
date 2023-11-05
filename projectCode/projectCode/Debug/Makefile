@@ -42,7 +42,8 @@ C_SRCS +=  \
 ../Utils/I2C.cpp \
 ../Utils/SDC30.cpp \
 ../Utils/SODA.cpp \
-../Utils/UART.cpp
+../Utils/UART.cpp \
+../Utils/X10Sender.cpp
 
 
 PREPROCESSING_SRCS += 
@@ -56,28 +57,32 @@ main.o \
 Utils/I2C.o \
 Utils/SDC30.o \
 Utils/SODA.o \
-Utils/UART.o
+Utils/UART.o \
+Utils/X10Sender.o
 
 OBJS_AS_ARGS +=  \
 main.o \
 Utils/I2C.o \
 Utils/SDC30.o \
 Utils/SODA.o \
-Utils/UART.o
+Utils/UART.o \
+Utils/X10Sender.o
 
 C_DEPS +=  \
 main.d \
 Utils/I2C.d \
 Utils/SDC30.d \
 Utils/SODA.d \
-Utils/UART.d
+Utils/UART.d \
+Utils/X10Sender.d
 
 C_DEPS_AS_ARGS +=  \
 main.d \
 Utils/I2C.d \
 Utils/SDC30.d \
 Utils/SODA.d \
-Utils/UART.d
+Utils/UART.d \
+Utils/X10Sender.d
 
 OUTPUT_FILE_PATH +=projectCode.elf
 
@@ -122,6 +127,13 @@ Utils/SODA.o: ../Utils/SODA.cpp
 	
 
 Utils/UART.o: ../Utils/UART.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Utils/X10Sender.o: ../Utils/X10Sender.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

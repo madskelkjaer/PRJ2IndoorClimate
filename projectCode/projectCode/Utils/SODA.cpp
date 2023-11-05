@@ -50,9 +50,9 @@ void SODA::collectData()
 {
 	uint8_t numAverage = 3;
 	
-	double co2_sum = 0;
-	double temp_sum = 0;
-	double hum_sum = 0;
+	float co2_sum = 0;
+	float temp_sum = 0;
+	float hum_sum = 0;
 	
 	for (uint8_t i = 0; i < numAverage; i++)
 	{

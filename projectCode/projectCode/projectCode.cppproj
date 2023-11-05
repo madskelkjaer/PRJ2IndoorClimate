@@ -189,6 +189,12 @@
     <Compile Include="Utils\UART.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Utils\X10Sender.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Utils\X10Sender.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utils" />
