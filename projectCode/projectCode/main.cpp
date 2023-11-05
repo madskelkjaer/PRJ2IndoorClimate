@@ -7,6 +7,9 @@
 #include "Utils/X10Sender.h"
 #include "Utils/UART.h"
 
+void interruptSender(X10Sender sender) {
+	
+}
 
 int main(void)
 {
@@ -16,9 +19,9 @@ int main(void)
 	
 	X10Sender sender;
 	
-	uint8_t address[4] = {1,1,1,1};
+	uint8_t windowAddress[4] = {0,0,0,1};
 	
-	sender.sendData('A', address);
+	sender.sendData('A', windowAddress);
 	
 	UART uart;
 	
@@ -26,12 +29,18 @@ int main(void)
 	
 	for (int i = 0; i < 16; i++)
 	{
-		int nextbit = sender.getNextBit();
+ 		int nextbit = sender.getNextBit();
 		
 		if (nextbit == 1) {
 			uart.transmitString("1,");
+			sender.enableTransmitter();
+			_delay_ms(1000);
+			sender.disableTransmitter();
 		} else {
+			sender.disableTransmitter();
+			_delay_ms(1000);
 			uart.transmitString("0,");
+			
 		}
 	}
 	

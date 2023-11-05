@@ -22,6 +22,17 @@ X10Sender::X10Sender()
 	dataArray_[6] = 0;
 	dataArray_[7] = 0;
 	
+	// PORTB er output.
+	DDRB = 0b00000000;
+	
+	// Timer 1 til CTC mode.
+	// Prescaler = 1
+	// Toggle compare match.
+	TRANSMITTER_TIMER_A = 0b01000000;
+	TRANSMITTER_TIMER_B = 0b00001001;
+	
+	TRANSMITTER_TIMER = 0;
+	
 	// Pin som der bliver sendt 120kHz på.
 	// txPin_ = DDRB;
 	// txPin_ = 0xFF;
@@ -56,7 +67,7 @@ void X10Sender::sendData(char command, uint8_t address[4])
 
 bool X10Sender::dataReady()
 {
-	return dataReady_;
+  	return dataReady_;
 }
 
 uint8_t X10Sender::getNextBit()
@@ -73,11 +84,13 @@ uint8_t X10Sender::getNextBit()
 }
 
 void X10Sender::enableTransmitter() {
-	TRANSMITTER_TIMER = TRANSMITTER_TIMER_ON;
+	DDRB = 0b00100000; // Sætter PORTB (OC1A el. PB5) til output.
+	TRANSMITTER_TIMER = 66; // 120Khz
 }
 
 void X10Sender::disableTransmitter() {
-	TRANSMITTER_TIMER = TRANSMITTER_TIMER_OFF;
+	DDRB = 0b00000000; // Slukker PORTB.
+	TRANSMITTER_TIMER = 0;
 }
 
 void X10Sender::encodeData(char command)

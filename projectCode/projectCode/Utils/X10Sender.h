@@ -8,11 +8,12 @@
 
 #ifndef __X10SENDER_H__
 #define __X10SENDER_H__
+#include <avr/io.h>
 #include <stdio.h>
 
-#define TRANSMITTER_TIMER TCCR1A
-#define TRANSMITTER_TIMER_ON 0b01000000
-#define TRANSMITTER_TIMER_OFF 0b00000000
+#define TRANSMITTER_TIMER OCR1A
+#define TRANSMITTER_TIMER_A TCCR1A
+#define TRANSMITTER_TIMER_B TCCR1B
 
 struct asciiTable {
 	char character;
