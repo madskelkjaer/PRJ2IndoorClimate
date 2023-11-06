@@ -32,6 +32,10 @@ int main(void)
 	X10Sender sender;
 	uint8_t windowAddress[4] = {0,0,0,1};
 	
+	sender.enableTransmitter();
+	
+	return 0;
+	
 	char recievedChar;
 	while(true)
 	{
