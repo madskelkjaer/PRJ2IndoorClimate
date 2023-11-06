@@ -13,14 +13,12 @@ X10Sender::X10Sender()
 {
 	currentBit_ = 0;
 	dataReady_ = false;
-	dataArray_[0] = 0;
-	dataArray_[1] = 0;
-	dataArray_[2] = 0;
-	dataArray_[3] = 0;
-	dataArray_[4] = 0;
-	dataArray_[5] = 0;
-	dataArray_[6] = 0;
-	dataArray_[7] = 0;
+	
+	// Nulstiller dataArray_ til 0.
+	for (uint8_t i = 0; i < 8; i++)
+	{
+		dataArray_[i] = 0;
+	}
 	
 	// PORTB er output.
 	DDRB = 0b00000000;
@@ -34,8 +32,7 @@ X10Sender::X10Sender()
 	TRANSMITTER_TIMER = 0;
 	
 	// Pin som der bliver sendt 120kHz på.
-	// txPin_ = DDRB;
-	// txPin_ = 0xFF;
+	txPin_ = DDRB;
 } //X10Sender
 
 // default destructor
@@ -86,13 +83,15 @@ uint8_t X10Sender::getNextBit()
 	return nextBit;
 }
 
-void X10Sender::enableTransmitter() {
-	DDRB = 0b00100000; // Sætter PORTB (OC1A el. PB5) til output.
+void X10Sender::enableTransmitter() 
+{
+	txPin_ = 0b00100000; // Sætter PORTB (OC1A el. PB5) til output.
 	TRANSMITTER_TIMER = 66; // 120Khz
 }
 
-void X10Sender::disableTransmitter() {
-	DDRB = 0b00000000; // Slukker PORTB.
+void X10Sender::disableTransmitter() 
+{
+	txPin_ = 0b00000000; // Slukker PORTB.
 	TRANSMITTER_TIMER = 0;
 }
 
@@ -103,7 +102,8 @@ void X10Sender::encodeData(char command)
 	
 	for (uint8_t i = 0; i < 28; i++)
 	{
-		if (asciiLookup_[i].character == command) {
+		if (asciiLookup_[i].character == command) 
+		{
 			
 			// Kopierer binært data fra lookup tabellen til dataArray fra index 8 og frem.
 			for (uint8_t j = DATA_START; j < DATA_END; j++)

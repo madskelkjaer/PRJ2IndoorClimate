@@ -3,31 +3,31 @@ Sender.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000254  00800200  0000047e  00000512  2**0
+  0 .data         00000254  00800200  0000048e  00000522  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         0000047e  00000000  00000000  00000094  2**1
+  1 .text         0000048e  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000002  00800454  00800454  00000766  2**0
+  2 .bss          00000002  00800454  00800454  00000776  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000766  2**0
+  3 .comment      00000030  00000000  00000000  00000776  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000798  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000007a8  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000c0  00000000  00000000  000007d8  2**0
+  5 .debug_aranges 000000c0  00000000  00000000  000007e8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001b50  00000000  00000000  00000898  2**0
+  6 .debug_info   00001b6e  00000000  00000000  000008a8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 0000111e  00000000  00000000  000023e8  2**0
+  7 .debug_abbrev 00001139  00000000  00000000  00002416  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000007a1  00000000  00000000  00003506  2**0
+  8 .debug_line   0000079d  00000000  00000000  0000354f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000001a8  00000000  00000000  00003ca8  2**2
+  9 .debug_frame  000001a8  00000000  00000000  00003cec  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000917  00000000  00000000  00003e50  2**0
+ 10 .debug_str    00000917  00000000  00000000  00003e94  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000629  00000000  00000000  00004767  2**0
+ 11 .debug_loc    0000064a  00000000  00000000  000047ab  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000090  00000000  00000000  00004d90  2**0
+ 12 .debug_ranges 00000090  00000000  00000000  00004df5  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -162,7 +162,7 @@ Disassembly of section .text:
   f4:	14 e0       	ldi	r17, 0x04	; 4
   f6:	a0 e0       	ldi	r26, 0x00	; 0
   f8:	b2 e0       	ldi	r27, 0x02	; 2
-  fa:	ee e7       	ldi	r30, 0x7E	; 126
+  fa:	ee e8       	ldi	r30, 0x8E	; 142
   fc:	f4 e0       	ldi	r31, 0x04	; 4
   fe:	00 e0       	ldi	r16, 0x00	; 0
  100:	0b bf       	out	0x3b, r16	; 59
@@ -187,14 +187,14 @@ Disassembly of section .text:
  11a:	b2 07       	cpc	r27, r18
  11c:	e1 f7       	brne	.-8      	; 0x116 <.do_clear_bss_loop>
  11e:	02 d0       	rcall	.+4      	; 0x124 <main>
- 120:	ac c1       	rjmp	.+856    	; 0x47a <_exit>
+ 120:	b4 c1       	rjmp	.+872    	; 0x48a <_exit>
 
 00000122 <__bad_interrupt>:
  122:	6e cf       	rjmp	.-292    	; 0x0 <__vectors>
 
 00000124 <main>:
-#include "Utils/UART.h"
 
+#define INTERRUPT_PIN INT4_vect
 volatile int interruptFlag = 0;
 
 int main(void)
@@ -279,7 +279,7 @@ int main(void)
 		if (!sender.dataReady()) {
  192:	ce 01       	movw	r24, r28
  194:	02 96       	adiw	r24, 0x02	; 2
- 196:	d8 d0       	rcall	.+432    	; 0x348 <_ZN9X10Sender9dataReadyEv>
+ 196:	de d0       	rcall	.+444    	; 0x354 <_ZN9X10Sender9dataReadyEv>
  198:	81 11       	cpse	r24, r1
  19a:	53 c0       	rjmp	.+166    	; 0x242 <main+0x11e>
 			uart.transmitString("\r\n\nKlar til næste kommando");
@@ -320,7 +320,7 @@ int main(void)
  1d2:	6f e4       	ldi	r22, 0x4F	; 79
  1d4:	ce 01       	movw	r24, r28
  1d6:	02 96       	adiw	r24, 0x02	; 2
- 1d8:	0b d1       	rcall	.+534    	; 0x3f0 <_ZN9X10Sender8sendDataEcPh>
+ 1d8:	13 d1       	rcall	.+550    	; 0x400 <_ZN9X10Sender8sendDataEcPh>
  1da:	33 c0       	rjmp	.+102    	; 0x242 <main+0x11e>
 				}
 				break;
@@ -339,7 +339,7 @@ int main(void)
  1ec:	63 e4       	ldi	r22, 0x43	; 67
  1ee:	ce 01       	movw	r24, r28
  1f0:	02 96       	adiw	r24, 0x02	; 2
- 1f2:	fe d0       	rcall	.+508    	; 0x3f0 <_ZN9X10Sender8sendDataEcPh>
+ 1f2:	06 d1       	rcall	.+524    	; 0x400 <_ZN9X10Sender8sendDataEcPh>
 				}
 				break;
  1f4:	26 c0       	rjmp	.+76     	; 0x242 <main+0x11e>
@@ -358,7 +358,7 @@ int main(void)
  206:	68 e4       	ldi	r22, 0x48	; 72
  208:	ce 01       	movw	r24, r28
  20a:	02 96       	adiw	r24, 0x02	; 2
- 20c:	f1 d0       	rcall	.+482    	; 0x3f0 <_ZN9X10Sender8sendDataEcPh>
+ 20c:	f9 d0       	rcall	.+498    	; 0x400 <_ZN9X10Sender8sendDataEcPh>
 				}
 				break;
  20e:	19 c0       	rjmp	.+50     	; 0x242 <main+0x11e>
@@ -408,7 +408,7 @@ int main(void)
 			uint8_t nextBit = sender.getNextBit();
  250:	ce 01       	movw	r24, r28
  252:	02 96       	adiw	r24, 0x02	; 2
- 254:	7c d0       	rcall	.+248    	; 0x34e <_ZN9X10Sender10getNextBitEv>
+ 254:	82 d0       	rcall	.+260    	; 0x35a <_ZN9X10Sender10getNextBitEv>
 			
 			if (nextBit == 1) {
  256:	81 30       	cpi	r24, 0x01	; 1
@@ -422,7 +422,7 @@ int main(void)
 				sender.enableTransmitter();
  264:	ce 01       	movw	r24, r28
  266:	02 96       	adiw	r24, 0x02	; 2
- 268:	81 d0       	rcall	.+258    	; 0x36c <_ZN9X10Sender17enableTransmitterEv>
+ 268:	87 d0       	rcall	.+270    	; 0x378 <_ZN9X10Sender17enableTransmitterEv>
  26a:	8f e9       	ldi	r24, 0x9F	; 159
 	#else
 		//round up by default
@@ -439,7 +439,7 @@ int main(void)
 				_delay_ms(1);
 				sender.disableTransmitter();
  278:	02 96       	adiw	r24, 0x02	; 2
- 27a:	81 d0       	rcall	.+258    	; 0x37e <_ZN9X10Sender18disableTransmitterEv>
+ 27a:	88 d0       	rcall	.+272    	; 0x38c <_ZN9X10Sender18disableTransmitterEv>
  27c:	0b c0       	rjmp	.+22     	; 0x294 <main+0x170>
  27e:	61 e5       	ldi	r22, 0x51	; 81
  280:	74 e0       	ldi	r23, 0x04	; 4
@@ -471,7 +471,7 @@ int main(void)
 	}
 }
 
-ISR(INT4_vect) {
+ISR(INTERRUPT_PIN) {
  2a4:	0f 92       	push	r0
  2a6:	11 24       	eor	r1, r1
  2a8:	8f 93       	push	r24
@@ -580,291 +580,299 @@ unsigned char UART::recieve()
  318:	08 95       	ret
 
 0000031a <_ZN9X10SenderC1Ev>:
-	// txPin_ = DDRB;
-	// txPin_ = 0xFF;
+	// Pin som der bliver sendt 120kHz på.
+	txPin_ = DDRB;
 } //X10Sender
 
 // default destructor
 X10Sender::~X10Sender()
- 31a:	fc 01       	movw	r30, r24
- 31c:	11 8a       	std	Z+17, r1	; 0x11
- 31e:	10 82       	st	Z, r1
- 320:	11 82       	std	Z+1, r1	; 0x01
- 322:	12 82       	std	Z+2, r1	; 0x02
- 324:	13 82       	std	Z+3, r1	; 0x03
- 326:	14 82       	std	Z+4, r1	; 0x04
- 328:	15 82       	std	Z+5, r1	; 0x05
- 32a:	16 82       	std	Z+6, r1	; 0x06
- 32c:	17 82       	std	Z+7, r1	; 0x07
- 32e:	10 86       	std	Z+8, r1	; 0x08
- 330:	14 b8       	out	0x04, r1	; 4
- 332:	80 e4       	ldi	r24, 0x40	; 64
- 334:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7c0080>
- 338:	89 e0       	ldi	r24, 0x09	; 9
- 33a:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7c0081>
- 33e:	10 92 89 00 	sts	0x0089, r1	; 0x800089 <__TEXT_REGION_LENGTH__+0x7c0089>
- 342:	10 92 88 00 	sts	0x0088, r1	; 0x800088 <__TEXT_REGION_LENGTH__+0x7c0088>
- 346:	08 95       	ret
+ 31a:	dc 01       	movw	r26, r24
+ 31c:	51 96       	adiw	r26, 0x11	; 17
+ 31e:	1c 92       	st	X, r1
+ 320:	51 97       	sbiw	r26, 0x11	; 17
+ 322:	1c 92       	st	X, r1
+ 324:	90 e0       	ldi	r25, 0x00	; 0
+ 326:	98 30       	cpi	r25, 0x08	; 8
+ 328:	30 f4       	brcc	.+12     	; 0x336 <_ZN9X10SenderC1Ev+0x1c>
+ 32a:	fd 01       	movw	r30, r26
+ 32c:	e9 0f       	add	r30, r25
+ 32e:	f1 1d       	adc	r31, r1
+ 330:	11 82       	std	Z+1, r1	; 0x01
+ 332:	9f 5f       	subi	r25, 0xFF	; 255
+ 334:	f8 cf       	rjmp	.-16     	; 0x326 <_ZN9X10SenderC1Ev+0xc>
+ 336:	14 b8       	out	0x04, r1	; 4
+ 338:	80 e4       	ldi	r24, 0x40	; 64
+ 33a:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7c0080>
+ 33e:	89 e0       	ldi	r24, 0x09	; 9
+ 340:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7c0081>
+ 344:	10 92 89 00 	sts	0x0089, r1	; 0x800089 <__TEXT_REGION_LENGTH__+0x7c0089>
+ 348:	10 92 88 00 	sts	0x0088, r1	; 0x800088 <__TEXT_REGION_LENGTH__+0x7c0088>
+ 34c:	84 b1       	in	r24, 0x04	; 4
+ 34e:	52 96       	adiw	r26, 0x12	; 18
+ 350:	8c 93       	st	X, r24
+ 352:	08 95       	ret
 
-00000348 <_ZN9X10Sender9dataReadyEv>:
+00000354 <_ZN9X10Sender9dataReadyEv>:
 }
 
 bool X10Sender::dataReady()
 {
   	return dataReady_;
 }
- 348:	fc 01       	movw	r30, r24
- 34a:	80 81       	ld	r24, Z
- 34c:	08 95       	ret
+ 354:	fc 01       	movw	r30, r24
+ 356:	80 81       	ld	r24, Z
+ 358:	08 95       	ret
 
-0000034e <_ZN9X10Sender10getNextBitEv>:
+0000035a <_ZN9X10Sender10getNextBitEv>:
 
 uint8_t X10Sender::getNextBit()
 {
- 34e:	fc 01       	movw	r30, r24
+ 35a:	fc 01       	movw	r30, r24
 	// Hvis vi er nået til enden af vores dataArray_ så sender vi bare 0'ere for resten.
 	if (currentBit_ >= 16) {
- 350:	91 89       	ldd	r25, Z+17	; 0x11
- 352:	90 31       	cpi	r25, 0x10	; 16
- 354:	18 f0       	brcs	.+6      	; 0x35c <_ZN9X10Sender10getNextBitEv+0xe>
+ 35c:	91 89       	ldd	r25, Z+17	; 0x11
+ 35e:	90 31       	cpi	r25, 0x10	; 16
+ 360:	18 f0       	brcs	.+6      	; 0x368 <_ZN9X10Sender10getNextBitEv+0xe>
 		dataReady_ = false;
- 356:	10 82       	st	Z, r1
+ 362:	10 82       	st	Z, r1
 		return 0;
- 358:	80 e0       	ldi	r24, 0x00	; 0
- 35a:	08 95       	ret
+ 364:	80 e0       	ldi	r24, 0x00	; 0
+ 366:	08 95       	ret
 	}
 	
 	uint8_t nextBit = dataArray_[currentBit_];
- 35c:	df 01       	movw	r26, r30
- 35e:	a9 0f       	add	r26, r25
- 360:	b1 1d       	adc	r27, r1
- 362:	11 96       	adiw	r26, 0x01	; 1
- 364:	8c 91       	ld	r24, X
+ 368:	df 01       	movw	r26, r30
+ 36a:	a9 0f       	add	r26, r25
+ 36c:	b1 1d       	adc	r27, r1
+ 36e:	11 96       	adiw	r26, 0x01	; 1
+ 370:	8c 91       	ld	r24, X
 	currentBit_++;
- 366:	9f 5f       	subi	r25, 0xFF	; 255
- 368:	91 8b       	std	Z+17, r25	; 0x11
+ 372:	9f 5f       	subi	r25, 0xFF	; 255
+ 374:	91 8b       	std	Z+17, r25	; 0x11
 	return nextBit;
 }
- 36a:	08 95       	ret
+ 376:	08 95       	ret
 
-0000036c <_ZN9X10Sender17enableTransmitterEv>:
+00000378 <_ZN9X10Sender17enableTransmitterEv>:
 
 void X10Sender::enableTransmitter() {
-	DDRB = 0b00100000; // Sætter PORTB (OC1A el. PB5) til output.
- 36c:	80 e2       	ldi	r24, 0x20	; 32
- 36e:	84 b9       	out	0x04, r24	; 4
+	txPin_ = 0b00100000; // Sætter PORTB (OC1A el. PB5) til output.
+ 378:	20 e2       	ldi	r18, 0x20	; 32
+ 37a:	fc 01       	movw	r30, r24
+ 37c:	22 8b       	std	Z+18, r18	; 0x12
 	TRANSMITTER_TIMER = 66; // 120Khz
- 370:	82 e4       	ldi	r24, 0x42	; 66
- 372:	90 e0       	ldi	r25, 0x00	; 0
- 374:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7c0089>
- 378:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7c0088>
- 37c:	08 95       	ret
+ 37e:	82 e4       	ldi	r24, 0x42	; 66
+ 380:	90 e0       	ldi	r25, 0x00	; 0
+ 382:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7c0089>
+ 386:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7c0088>
+ 38a:	08 95       	ret
 
-0000037e <_ZN9X10Sender18disableTransmitterEv>:
+0000038c <_ZN9X10Sender18disableTransmitterEv>:
 }
 
 void X10Sender::disableTransmitter() {
-	DDRB = 0b00000000; // Slukker PORTB.
- 37e:	14 b8       	out	0x04, r1	; 4
+	txPin_ = 0b00000000; // Slukker PORTB.
+ 38c:	fc 01       	movw	r30, r24
+ 38e:	12 8a       	std	Z+18, r1	; 0x12
 	TRANSMITTER_TIMER = 0;
- 380:	10 92 89 00 	sts	0x0089, r1	; 0x800089 <__TEXT_REGION_LENGTH__+0x7c0089>
- 384:	10 92 88 00 	sts	0x0088, r1	; 0x800088 <__TEXT_REGION_LENGTH__+0x7c0088>
- 388:	08 95       	ret
+ 390:	10 92 89 00 	sts	0x0089, r1	; 0x800089 <__TEXT_REGION_LENGTH__+0x7c0089>
+ 394:	10 92 88 00 	sts	0x0088, r1	; 0x800088 <__TEXT_REGION_LENGTH__+0x7c0088>
+ 398:	08 95       	ret
 
-0000038a <_ZN9X10Sender10encodeDataEc>:
+0000039a <_ZN9X10Sender10encodeDataEc>:
 }
 
 void X10Sender::encodeData(char command)
 {	
- 38a:	dc 01       	movw	r26, r24
+ 39a:	dc 01       	movw	r26, r24
 	const int DATA_START = 8;
 	const int DATA_END = 16;
 	
 	for (uint8_t i = 0; i < 28; i++)
- 38c:	90 e0       	ldi	r25, 0x00	; 0
- 38e:	9c 31       	cpi	r25, 0x1C	; 28
- 390:	70 f5       	brcc	.+92     	; 0x3ee <_ZN9X10Sender10encodeDataEc+0x64>
+ 39c:	90 e0       	ldi	r25, 0x00	; 0
+ 39e:	9c 31       	cpi	r25, 0x1C	; 28
+ 3a0:	70 f5       	brcc	.+92     	; 0x3fe <_ZN9X10Sender10encodeDataEc+0x64>
 	{
 		if (asciiLookup_[i].character == command) {
- 392:	29 2f       	mov	r18, r25
- 394:	30 e0       	ldi	r19, 0x00	; 0
- 396:	41 e1       	ldi	r20, 0x11	; 17
- 398:	42 9f       	mul	r20, r18
- 39a:	f0 01       	movw	r30, r0
- 39c:	43 9f       	mul	r20, r19
- 39e:	f0 0d       	add	r31, r0
- 3a0:	11 24       	eor	r1, r1
- 3a2:	e0 50       	subi	r30, 0x00	; 0
- 3a4:	fe 4f       	sbci	r31, 0xFE	; 254
- 3a6:	40 81       	ld	r20, Z
- 3a8:	46 13       	cpse	r20, r22
- 3aa:	1f c0       	rjmp	.+62     	; 0x3ea <_ZN9X10Sender10encodeDataEc+0x60>
- 3ac:	88 e0       	ldi	r24, 0x08	; 8
+ 3a2:	29 2f       	mov	r18, r25
+ 3a4:	30 e0       	ldi	r19, 0x00	; 0
+ 3a6:	41 e1       	ldi	r20, 0x11	; 17
+ 3a8:	42 9f       	mul	r20, r18
+ 3aa:	f0 01       	movw	r30, r0
+ 3ac:	43 9f       	mul	r20, r19
+ 3ae:	f0 0d       	add	r31, r0
+ 3b0:	11 24       	eor	r1, r1
+ 3b2:	e0 50       	subi	r30, 0x00	; 0
+ 3b4:	fe 4f       	sbci	r31, 0xFE	; 254
+ 3b6:	40 81       	ld	r20, Z
+ 3b8:	46 13       	cpse	r20, r22
+ 3ba:	1f c0       	rjmp	.+62     	; 0x3fa <_ZN9X10Sender10encodeDataEc+0x60>
+ 3bc:	88 e0       	ldi	r24, 0x08	; 8
 			
 			// Kopierer binært data fra lookup tabellen til dataArray fra index 8 og frem.
 			for (uint8_t j = DATA_START; j < DATA_END; j++)
- 3ae:	80 31       	cpi	r24, 0x10	; 16
- 3b0:	b8 f4       	brcc	.+46     	; 0x3e0 <_ZN9X10Sender10encodeDataEc+0x56>
+ 3be:	80 31       	cpi	r24, 0x10	; 16
+ 3c0:	b8 f4       	brcc	.+46     	; 0x3f0 <_ZN9X10Sender10encodeDataEc+0x56>
 			{
 				dataArray_[j] = asciiLookup_[i].binary[j - DATA_START];
- 3b2:	68 2f       	mov	r22, r24
- 3b4:	70 e0       	ldi	r23, 0x00	; 0
- 3b6:	fb 01       	movw	r30, r22
- 3b8:	38 97       	sbiw	r30, 0x08	; 8
- 3ba:	ee 0f       	add	r30, r30
- 3bc:	ff 1f       	adc	r31, r31
- 3be:	91 e1       	ldi	r25, 0x11	; 17
- 3c0:	92 9f       	mul	r25, r18
- 3c2:	a0 01       	movw	r20, r0
- 3c4:	93 9f       	mul	r25, r19
- 3c6:	50 0d       	add	r21, r0
- 3c8:	11 24       	eor	r1, r1
- 3ca:	e4 0f       	add	r30, r20
- 3cc:	f5 1f       	adc	r31, r21
- 3ce:	e0 50       	subi	r30, 0x00	; 0
- 3d0:	fe 4f       	sbci	r31, 0xFE	; 254
- 3d2:	91 81       	ldd	r25, Z+1	; 0x01
- 3d4:	fd 01       	movw	r30, r26
- 3d6:	e6 0f       	add	r30, r22
- 3d8:	f7 1f       	adc	r31, r23
- 3da:	91 83       	std	Z+1, r25	; 0x01
+ 3c2:	68 2f       	mov	r22, r24
+ 3c4:	70 e0       	ldi	r23, 0x00	; 0
+ 3c6:	fb 01       	movw	r30, r22
+ 3c8:	38 97       	sbiw	r30, 0x08	; 8
+ 3ca:	ee 0f       	add	r30, r30
+ 3cc:	ff 1f       	adc	r31, r31
+ 3ce:	91 e1       	ldi	r25, 0x11	; 17
+ 3d0:	92 9f       	mul	r25, r18
+ 3d2:	a0 01       	movw	r20, r0
+ 3d4:	93 9f       	mul	r25, r19
+ 3d6:	50 0d       	add	r21, r0
+ 3d8:	11 24       	eor	r1, r1
+ 3da:	e4 0f       	add	r30, r20
+ 3dc:	f5 1f       	adc	r31, r21
+ 3de:	e0 50       	subi	r30, 0x00	; 0
+ 3e0:	fe 4f       	sbci	r31, 0xFE	; 254
+ 3e2:	91 81       	ldd	r25, Z+1	; 0x01
+ 3e4:	fd 01       	movw	r30, r26
+ 3e6:	e6 0f       	add	r30, r22
+ 3e8:	f7 1f       	adc	r31, r23
+ 3ea:	91 83       	std	Z+1, r25	; 0x01
 	for (uint8_t i = 0; i < 28; i++)
 	{
 		if (asciiLookup_[i].character == command) {
 			
 			// Kopierer binært data fra lookup tabellen til dataArray fra index 8 og frem.
 			for (uint8_t j = DATA_START; j < DATA_END; j++)
- 3dc:	8f 5f       	subi	r24, 0xFF	; 255
- 3de:	e7 cf       	rjmp	.-50     	; 0x3ae <_ZN9X10Sender10encodeDataEc+0x24>
+ 3ec:	8f 5f       	subi	r24, 0xFF	; 255
+ 3ee:	e7 cf       	rjmp	.-50     	; 0x3be <_ZN9X10Sender10encodeDataEc+0x24>
 			{
 				dataArray_[j] = asciiLookup_[i].binary[j - DATA_START];
 			}
 			
 			// sætter dataReady og currentbit til standard værdier.
 			dataReady_ = true;
- 3e0:	81 e0       	ldi	r24, 0x01	; 1
- 3e2:	8c 93       	st	X, r24
+ 3f0:	81 e0       	ldi	r24, 0x01	; 1
+ 3f2:	8c 93       	st	X, r24
 			currentBit_ = 0;
- 3e4:	51 96       	adiw	r26, 0x11	; 17
- 3e6:	1c 92       	st	X, r1
+ 3f4:	51 96       	adiw	r26, 0x11	; 17
+ 3f6:	1c 92       	st	X, r1
 			
 			return;
- 3e8:	08 95       	ret
+ 3f8:	08 95       	ret
 void X10Sender::encodeData(char command)
 {	
 	const int DATA_START = 8;
 	const int DATA_END = 16;
 	
 	for (uint8_t i = 0; i < 28; i++)
- 3ea:	9f 5f       	subi	r25, 0xFF	; 255
- 3ec:	d0 cf       	rjmp	.-96     	; 0x38e <_ZN9X10Sender10encodeDataEc+0x4>
- 3ee:	08 95       	ret
+ 3fa:	9f 5f       	subi	r25, 0xFF	; 255
+ 3fc:	d0 cf       	rjmp	.-96     	; 0x39e <_ZN9X10Sender10encodeDataEc+0x4>
+ 3fe:	08 95       	ret
 
-000003f0 <_ZN9X10Sender8sendDataEcPh>:
+00000400 <_ZN9X10Sender8sendDataEcPh>:
 // 	delete[] dataArray_;
 // 	delete[] asciiLookup_;
 } //~X10Sender
 
 void X10Sender::sendData(char command, uint8_t address[4])
 {
- 3f0:	0f 93       	push	r16
- 3f2:	1f 93       	push	r17
- 3f4:	cf 93       	push	r28
- 3f6:	df 93       	push	r29
- 3f8:	cd b7       	in	r28, 0x3d	; 61
- 3fa:	de b7       	in	r29, 0x3e	; 62
- 3fc:	28 97       	sbiw	r28, 0x08	; 8
- 3fe:	0f b6       	in	r0, 0x3f	; 63
- 400:	f8 94       	cli
- 402:	de bf       	out	0x3e, r29	; 62
- 404:	0f be       	out	0x3f, r0	; 63
- 406:	cd bf       	out	0x3d, r28	; 61
- 408:	8c 01       	movw	r16, r24
+ 400:	0f 93       	push	r16
+ 402:	1f 93       	push	r17
+ 404:	cf 93       	push	r28
+ 406:	df 93       	push	r29
+ 408:	cd b7       	in	r28, 0x3d	; 61
+ 40a:	de b7       	in	r29, 0x3e	; 62
+ 40c:	28 97       	sbiw	r28, 0x08	; 8
+ 40e:	0f b6       	in	r0, 0x3f	; 63
+ 410:	f8 94       	cli
+ 412:	de bf       	out	0x3e, r29	; 62
+ 414:	0f be       	out	0x3f, r0	; 63
+ 416:	cd bf       	out	0x3d, r28	; 61
+ 418:	8c 01       	movw	r16, r24
 	if (dataReady_) return; // Hvis der allerede er data, skal der ikke sendes en kommando.
- 40a:	dc 01       	movw	r26, r24
- 40c:	8c 91       	ld	r24, X
- 40e:	81 11       	cpse	r24, r1
- 410:	29 c0       	rjmp	.+82     	; 0x464 <__LOCK_REGION_LENGTH__+0x64>
+ 41a:	dc 01       	movw	r26, r24
+ 41c:	8c 91       	ld	r24, X
+ 41e:	81 11       	cpse	r24, r1
+ 420:	29 c0       	rjmp	.+82     	; 0x474 <_ZN9X10Sender8sendDataEcPh+0x74>
 	const int PROTOCOL_START = 0;
 	// de efterfølgende 4 bits er adressen på enheden vi vil snakke til.
 	const int ADDRESS_START = 4;
 	
 	// Protokollen starter altid med følgende bits.
 	int initiateProtocol[4] = {1,1,1,0};
- 412:	88 e0       	ldi	r24, 0x08	; 8
- 414:	ea eb       	ldi	r30, 0xBA	; 186
- 416:	f3 e0       	ldi	r31, 0x03	; 3
- 418:	de 01       	movw	r26, r28
- 41a:	11 96       	adiw	r26, 0x01	; 1
- 41c:	01 90       	ld	r0, Z+
- 41e:	0d 92       	st	X+, r0
- 420:	8a 95       	dec	r24
- 422:	e1 f7       	brne	.-8      	; 0x41c <__LOCK_REGION_LENGTH__+0x1c>
+ 422:	88 e0       	ldi	r24, 0x08	; 8
+ 424:	ea eb       	ldi	r30, 0xBA	; 186
+ 426:	f3 e0       	ldi	r31, 0x03	; 3
+ 428:	de 01       	movw	r26, r28
+ 42a:	11 96       	adiw	r26, 0x01	; 1
+ 42c:	01 90       	ld	r0, Z+
+ 42e:	0d 92       	st	X+, r0
+ 430:	8a 95       	dec	r24
+ 432:	e1 f7       	brne	.-8      	; 0x42c <_ZN9X10Sender8sendDataEcPh+0x2c>
 	
 	// Lægger dem i dataArray, så de kan blive sendt.
 	for (uint8_t i = 0; i < 4; i++)
- 424:	90 e0       	ldi	r25, 0x00	; 0
- 426:	94 30       	cpi	r25, 0x04	; 4
- 428:	d8 f4       	brcc	.+54     	; 0x460 <__LOCK_REGION_LENGTH__+0x60>
+ 434:	90 e0       	ldi	r25, 0x00	; 0
+ 436:	94 30       	cpi	r25, 0x04	; 4
+ 438:	d8 f4       	brcc	.+54     	; 0x470 <_ZN9X10Sender8sendDataEcPh+0x70>
 	{
 		dataArray_[i + PROTOCOL_START] = initiateProtocol[i];
- 42a:	29 2f       	mov	r18, r25
- 42c:	30 e0       	ldi	r19, 0x00	; 0
- 42e:	f9 01       	movw	r30, r18
- 430:	ee 0f       	add	r30, r30
- 432:	ff 1f       	adc	r31, r31
- 434:	a1 e0       	ldi	r26, 0x01	; 1
- 436:	b0 e0       	ldi	r27, 0x00	; 0
- 438:	ac 0f       	add	r26, r28
- 43a:	bd 1f       	adc	r27, r29
- 43c:	ea 0f       	add	r30, r26
- 43e:	fb 1f       	adc	r31, r27
- 440:	80 81       	ld	r24, Z
- 442:	f8 01       	movw	r30, r16
- 444:	e2 0f       	add	r30, r18
- 446:	f3 1f       	adc	r31, r19
- 448:	81 83       	std	Z+1, r24	; 0x01
+ 43a:	29 2f       	mov	r18, r25
+ 43c:	30 e0       	ldi	r19, 0x00	; 0
+ 43e:	f9 01       	movw	r30, r18
+ 440:	ee 0f       	add	r30, r30
+ 442:	ff 1f       	adc	r31, r31
+ 444:	a1 e0       	ldi	r26, 0x01	; 1
+ 446:	b0 e0       	ldi	r27, 0x00	; 0
+ 448:	ac 0f       	add	r26, r28
+ 44a:	bd 1f       	adc	r27, r29
+ 44c:	ea 0f       	add	r30, r26
+ 44e:	fb 1f       	adc	r31, r27
+ 450:	80 81       	ld	r24, Z
+ 452:	f8 01       	movw	r30, r16
+ 454:	e2 0f       	add	r30, r18
+ 456:	f3 1f       	adc	r31, r19
+ 458:	81 83       	std	Z+1, r24	; 0x01
 		dataArray_[i + ADDRESS_START] = address[i];
- 44a:	f9 01       	movw	r30, r18
- 44c:	34 96       	adiw	r30, 0x04	; 4
- 44e:	da 01       	movw	r26, r20
- 450:	a2 0f       	add	r26, r18
- 452:	b3 1f       	adc	r27, r19
- 454:	8c 91       	ld	r24, X
- 456:	e0 0f       	add	r30, r16
- 458:	f1 1f       	adc	r31, r17
- 45a:	81 83       	std	Z+1, r24	; 0x01
+ 45a:	f9 01       	movw	r30, r18
+ 45c:	34 96       	adiw	r30, 0x04	; 4
+ 45e:	da 01       	movw	r26, r20
+ 460:	a2 0f       	add	r26, r18
+ 462:	b3 1f       	adc	r27, r19
+ 464:	8c 91       	ld	r24, X
+ 466:	e0 0f       	add	r30, r16
+ 468:	f1 1f       	adc	r31, r17
+ 46a:	81 83       	std	Z+1, r24	; 0x01
 	
 	// Protokollen starter altid med følgende bits.
 	int initiateProtocol[4] = {1,1,1,0};
 	
 	// Lægger dem i dataArray, så de kan blive sendt.
 	for (uint8_t i = 0; i < 4; i++)
- 45c:	9f 5f       	subi	r25, 0xFF	; 255
- 45e:	e3 cf       	rjmp	.-58     	; 0x426 <__LOCK_REGION_LENGTH__+0x26>
- 460:	c8 01       	movw	r24, r16
+ 46c:	9f 5f       	subi	r25, 0xFF	; 255
+ 46e:	e3 cf       	rjmp	.-58     	; 0x436 <_ZN9X10Sender8sendDataEcPh+0x36>
+ 470:	c8 01       	movw	r24, r16
 	{
 		dataArray_[i + PROTOCOL_START] = initiateProtocol[i];
 		dataArray_[i + ADDRESS_START] = address[i];
 	}
 	
 	this->encodeData(command);
- 462:	93 df       	rcall	.-218    	; 0x38a <_ZN9X10Sender10encodeDataEc>
+ 472:	93 df       	rcall	.-218    	; 0x39a <_ZN9X10Sender10encodeDataEc>
 }
- 464:	28 96       	adiw	r28, 0x08	; 8
- 466:	0f b6       	in	r0, 0x3f	; 63
- 468:	f8 94       	cli
- 46a:	de bf       	out	0x3e, r29	; 62
- 46c:	0f be       	out	0x3f, r0	; 63
- 46e:	cd bf       	out	0x3d, r28	; 61
- 470:	df 91       	pop	r29
- 472:	cf 91       	pop	r28
- 474:	1f 91       	pop	r17
- 476:	0f 91       	pop	r16
- 478:	08 95       	ret
+ 474:	28 96       	adiw	r28, 0x08	; 8
+ 476:	0f b6       	in	r0, 0x3f	; 63
+ 478:	f8 94       	cli
+ 47a:	de bf       	out	0x3e, r29	; 62
+ 47c:	0f be       	out	0x3f, r0	; 63
+ 47e:	cd bf       	out	0x3d, r28	; 61
+ 480:	df 91       	pop	r29
+ 482:	cf 91       	pop	r28
+ 484:	1f 91       	pop	r17
+ 486:	0f 91       	pop	r16
+ 488:	08 95       	ret
 
-0000047a <_exit>:
- 47a:	f8 94       	cli
+0000048a <_exit>:
+ 48a:	f8 94       	cli
 
-0000047c <__stop_program>:
- 47c:	ff cf       	rjmp	.-2      	; 0x47c <__stop_program>
+0000048c <__stop_program>:
+ 48c:	ff cf       	rjmp	.-2      	; 0x48c <__stop_program>

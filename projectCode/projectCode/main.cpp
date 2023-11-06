@@ -8,6 +8,7 @@
 #include "Utils/X10Sender.h"
 #include "Utils/UART.h"
 
+#define INTERRUPT_PIN INT4_vect
 volatile int interruptFlag = 0;
 
 int main(void)
@@ -34,7 +35,8 @@ int main(void)
 	char recievedChar;
 	while(true)
 	{
-		if (!sender.dataReady()) {
+		if (!sender.dataReady())
+		{
 			uart.transmitString("\r\n\nKlar til næste kommando");
 			recievedChar = uart.recieve();
 			switch (recievedChar)
@@ -66,10 +68,11 @@ int main(void)
 					uart.transmitString("m - Denne menu\r\n");
 				}
 				break;
-			}	
+			}
 		}
 		
-		if (interruptFlag == 1) {
+		if (interruptFlag == 1)
+		{
 			uint8_t nextBit = sender.getNextBit();
 			
 			if (nextBit == 1) {
@@ -88,7 +91,8 @@ int main(void)
 	}
 }
 
-ISR(INT4_vect) {
-	interruptFlag = 1;	
+ISR(INTERRUPT_PIN)
+{
+	interruptFlag = 1;
 	EIFR = 0x00;
 }
