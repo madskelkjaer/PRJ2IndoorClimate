@@ -126,26 +126,13 @@ Discarded input sections
  .text          0x00000000        0x0 Utils/UART.o
  .data          0x00000000        0x0 Utils/UART.o
  .bss           0x00000000        0x0 Utils/UART.o
- .text._ZN4UART7recieveEv
-                0x00000000        0xe Utils/UART.o
  .text._ZN4UART13recieveStringEPci
                 0x00000000       0x58 Utils/UART.o
  .text          0x00000000        0x0 Utils/X10Sender.o
  .data          0x00000000        0x0 Utils/X10Sender.o
  .bss           0x00000000        0x0 Utils/X10Sender.o
- .text._ZN9X10Sender9dataReadyEv
-                0x00000000        0x6 Utils/X10Sender.o
- .text._ZN9X10Sender10getNextBitEv
-                0x00000000       0x1e Utils/X10Sender.o
- .text._ZN9X10Sender18disableTransmitterEv
-                0x00000000        0xe Utils/X10Sender.o
- .text._ZN9X10Sender10encodeDataEc
-                0x00000000       0x66 Utils/X10Sender.o
- .rodata        0x00000000        0x8 Utils/X10Sender.o
- .text._ZN9X10Sender8sendDataEcPh
-                0x00000000       0x8c Utils/X10Sender.o
- .data._ZN9X10Sender12asciiLookup_E
-                0x00000000      0x1ba Utils/X10Sender.o
+ .text._ZN9X10SenderD2Ev
+                0x00000000        0x2 Utils/X10Sender.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(addsf3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(addsf3.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(addsf3.o)
@@ -416,7 +403,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x26c
+.text           0x00000000      0x4a2
  *(.vectors)
  .vectors       0x00000000       0xe4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
                 0x00000000                __vector_default
@@ -533,37 +520,51 @@ END GROUP
                 0x00000122                __vector_42
                 0x00000124                . = ALIGN (0x2)
  *(.text.*)
- .text.main     0x00000124       0x86 main.o
+ .text.main     0x00000124      0x198 main.o
                 0x00000124                main
  .text.__vector_5
-                0x000001aa       0x2a main.o
-                0x000001aa                __vector_5
+                0x000002bc       0x2a main.o
+                0x000002bc                __vector_5
  .text._ZN4UARTC2Ev
-                0x000001d4       0x12 Utils/UART.o
-                0x000001d4                _ZN4UARTC1Ev
-                0x000001d4                _ZN4UARTC2Ev
+                0x000002e6       0x12 Utils/UART.o
+                0x000002e6                _ZN4UARTC1Ev
+                0x000002e6                _ZN4UARTC2Ev
  .text._ZN4UART8transmitEh
-                0x000001e6        0xe Utils/UART.o
-                0x000001e6                _ZN4UART8transmitEh
+                0x000002f8        0xe Utils/UART.o
+                0x000002f8                _ZN4UART8transmitEh
  .text._ZN4UART14transmitStringEPKc
-                0x000001f4       0x24 Utils/UART.o
-                0x000001f4                _ZN4UART14transmitStringEPKc
+                0x00000306       0x24 Utils/UART.o
+                0x00000306                _ZN4UART14transmitStringEPKc
+ .text._ZN4UART7recieveEv
+                0x0000032a        0xe Utils/UART.o
+                0x0000032a                _ZN4UART7recieveEv
  .text._ZN9X10SenderC2Ev
-                0x00000218       0x3a Utils/X10Sender.o
-                0x00000218                _ZN9X10SenderC1Ev
-                0x00000218                _ZN9X10SenderC2Ev
- .text._ZN9X10SenderD2Ev
-                0x00000252        0x2 Utils/X10Sender.o
-                0x00000252                _ZN9X10SenderD2Ev
-                0x00000252                _ZN9X10SenderD1Ev
+                0x00000338       0x2e Utils/X10Sender.o
+                0x00000338                _ZN9X10SenderC1Ev
+                0x00000338                _ZN9X10SenderC2Ev
+ .text._ZN9X10Sender9dataReadyEv
+                0x00000366        0x6 Utils/X10Sender.o
+                0x00000366                _ZN9X10Sender9dataReadyEv
+ .text._ZN9X10Sender10getNextBitEv
+                0x0000036c       0x24 Utils/X10Sender.o
+                0x0000036c                _ZN9X10Sender10getNextBitEv
  .text._ZN9X10Sender17enableTransmitterEv
-                0x00000254       0x14 Utils/X10Sender.o
-                0x00000254                _ZN9X10Sender17enableTransmitterEv
-                0x00000268                . = ALIGN (0x2)
+                0x00000390       0x12 Utils/X10Sender.o
+                0x00000390                _ZN9X10Sender17enableTransmitterEv
+ .text._ZN9X10Sender18disableTransmitterEv
+                0x000003a2        0xc Utils/X10Sender.o
+                0x000003a2                _ZN9X10Sender18disableTransmitterEv
+ .text._ZN9X10Sender10encodeDataEc
+                0x000003ae       0x66 Utils/X10Sender.o
+                0x000003ae                _ZN9X10Sender10encodeDataEc
+ .text._ZN9X10Sender8sendDataEcPh
+                0x00000414       0x8a Utils/X10Sender.o
+                0x00000414                _ZN9X10Sender8sendDataEcPh
+                0x0000049e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000268        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
-                0x00000268                _exit
-                0x00000268                exit
+ .fini9         0x0000049e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
+                0x0000049e                _exit
+                0x0000049e                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -582,41 +583,45 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000268        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
+ .fini0         0x0000049e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000026c                _etext = .
+                0x000004a2                _etext = .
 
-.data           0x00800200       0x50 load address 0x0000026c
+.data           0x00800200      0x254 load address 0x000004a2
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
+ .data._ZN9X10Sender12asciiLookup_E
+                0x00800200      0x1ba Utils/X10Sender.o
+                0x00800200                _ZN9X10Sender12asciiLookup_E
  *(.gnu.linkonce.d*)
  *(.rodata)
+ .rodata        0x008003ba        0x8 Utils/X10Sender.o
  *(.rodata*)
  .rodata.str1.1
-                0x00800200       0x50 main.o
+                0x008003c2       0x92 main.o
  *(.gnu.linkonce.r*)
-                0x00800250                . = ALIGN (0x2)
-                0x00800250                _edata = .
-                0x00800250                PROVIDE (__data_end, .)
+                0x00800454                . = ALIGN (0x2)
+                0x00800454                _edata = .
+                0x00800454                PROVIDE (__data_end, .)
 
-.bss            0x00800250        0x2
-                0x00800250                PROVIDE (__bss_start, .)
+.bss            0x00800454        0x2
+                0x00800454                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.interruptFlag
-                0x00800250        0x2 main.o
-                0x00800250                interruptFlag
+                0x00800454        0x2 main.o
+                0x00800454                interruptFlag
  *(COMMON)
-                0x00800252                PROVIDE (__bss_end, .)
-                0x0000026c                __data_load_start = LOADADDR (.data)
-                0x000002bc                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800456                PROVIDE (__bss_end, .)
+                0x000004a2                __data_load_start = LOADADDR (.data)
+                0x000006f6                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800252        0x0
+.noinit         0x00800456        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800252                _end = .
+                0x00800456                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -695,26 +700,26 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1802
+.debug_info     0x00000000     0x1b69
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0xbbc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_info    0x00000bbc      0x49a main.o
- .debug_info    0x00001056      0x2bc Utils/UART.o
- .debug_info    0x00001312      0x4f0 Utils/X10Sender.o
+ .debug_info    0x00000bbc      0x81f main.o
+ .debug_info    0x000013db      0x2bc Utils/UART.o
+ .debug_info    0x00001697      0x4d2 Utils/X10Sender.o
 
-.debug_abbrev   0x00000000     0x10b8
+.debug_abbrev   0x00000000     0x111e
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0xb1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_abbrev  0x00000b1a      0x1aa main.o
- .debug_abbrev  0x00000cc4      0x1bf Utils/UART.o
- .debug_abbrev  0x00000e83      0x235 Utils/X10Sender.o
+ .debug_abbrev  0x00000b1a      0x22b main.o
+ .debug_abbrev  0x00000d45      0x1bf Utils/UART.o
+ .debug_abbrev  0x00000f04      0x21a Utils/X10Sender.o
 
-.debug_line     0x00000000      0x690
+.debug_line     0x00000000      0x7d1
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1fa C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_line    0x000001fa      0x133 main.o
- .debug_line    0x0000032d      0x10d Utils/UART.o
- .debug_line    0x0000043a      0x256 Utils/X10Sender.o
+ .debug_line    0x000001fa      0x264 main.o
+ .debug_line    0x0000045e      0x10d Utils/UART.o
+ .debug_line    0x0000056b      0x266 Utils/X10Sender.o
 
 .debug_frame    0x00000000      0x1a8
  *(.debug_frame)
@@ -722,21 +727,21 @@ END GROUP
  .debug_frame   0x00000058       0xa0 Utils/UART.o
  .debug_frame   0x000000f8       0xb0 Utils/X10Sender.o
 
-.debug_str      0x00000000      0x8cc
+.debug_str      0x00000000      0x917
  *(.debug_str)
  .debug_str     0x00000000      0x3e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_str     0x000003e6      0x3db main.o
-                                0x41e (size before relaxing)
- .debug_str     0x000007c1       0x4f Utils/UART.o
+ .debug_str     0x000003e6      0x42e main.o
+                                0x471 (size before relaxing)
+ .debug_str     0x00000814       0x4f Utils/UART.o
                                 0x277 (size before relaxing)
- .debug_str     0x00000810       0xbc Utils/X10Sender.o
+ .debug_str     0x00000863       0xb4 Utils/X10Sender.o
                                 0x3ec (size before relaxing)
 
-.debug_loc      0x00000000      0x56c
+.debug_loc      0x00000000      0x609
  *(.debug_loc)
- .debug_loc     0x00000000       0x90 main.o
- .debug_loc     0x00000090      0x22c Utils/UART.o
- .debug_loc     0x000002bc      0x2b0 Utils/X10Sender.o
+ .debug_loc     0x00000000      0x16e main.o
+ .debug_loc     0x0000016e      0x22c Utils/UART.o
+ .debug_loc     0x0000039a      0x26f Utils/X10Sender.o
 
 .debug_macinfo
  *(.debug_macinfo)

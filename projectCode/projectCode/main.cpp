@@ -8,7 +8,6 @@
 #include "Utils/X10Sender.h"
 #include "Utils/UART.h"
 
-#define INTERRUPT_PIN INT4_vect
 volatile int interruptFlag = 0;
 
 int main(void)
@@ -32,15 +31,10 @@ int main(void)
 	X10Sender sender;
 	uint8_t windowAddress[4] = {0,0,0,1};
 	
-	sender.enableTransmitter();
-	
-	return 0;
-	
 	char recievedChar;
 	while(true)
 	{
-		if (!sender.dataReady())
-		{
+		if (!sender.dataReady()) {
 			uart.transmitString("\r\n\nKlar til næste kommando");
 			recievedChar = uart.recieve();
 			switch (recievedChar)
@@ -72,31 +66,40 @@ int main(void)
 					uart.transmitString("m - Denne menu\r\n");
 				}
 				break;
-			}
+			}	
 		}
 		
-		if (interruptFlag == 1)
-		{
+		if (interruptFlag == 1) {
 			uint8_t nextBit = sender.getNextBit();
 			
-			if (nextBit == 1) {
+			DDRB |= (1 << PB5);
+			PORTB |= (1 << PB5);
+			
+			if (nextBit == 2) {
+				// Hvis der ikke skal ske noget, skal der sendes et 1 tal.
+				//DDRB |= (1 << PB5);
+				//PORTB |= (1 << PB5);
+			} else if (nextBit == 1) {
 				uart.transmitString("1 ");
 				sender.enableTransmitter();
 				_delay_ms(1);
 				sender.disableTransmitter();
-				} else {
+			} else {
 				uart.transmitString("0 ");
+				sender.disableTransmitter(); // Måske skal denne bare ændres til 1;
 				_delay_ms(1);
 			}
 			
+			DDRB |= (0 << PB5);
+			PORTB |= (0 << PB5);
+						
 			interruptFlag = 0;
 		}
 		
 	}
 }
 
-ISR(INTERRUPT_PIN)
-{
-	interruptFlag = 1;
+ISR(INT4_vect) {
+	interruptFlag = 1;	
 	EIFR = 0x00;
 }
