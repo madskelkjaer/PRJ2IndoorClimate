@@ -28,12 +28,12 @@ class SDC30
 {
 public:
 	SDC30(uint8_t address);
-	bool ready();
 	void measure();
 	double getCo2();
 	double getTemperature();
 	double getHumidity();
 private:
+	bool ready();
 	dataArray data_;
 	uint8_t address_;
 	uint8_t writeAddress_;
