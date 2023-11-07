@@ -466,7 +466,7 @@ int main(void)
  298:	ce 01       	movw	r24, r28
  29a:	02 96       	adiw	r24, 0x02	; 2
  29c:	82 d0       	rcall	.+260    	; 0x3a2 <_ZN9X10Sender18disableTransmitterEv>
-				sender.disableTransmitter();
+				sender.disableTransmitter(); // Måske skal denne bare ændres til 1;
  29e:	8f e9       	ldi	r24, 0x9F	; 159
  2a0:	9f e0       	ldi	r25, 0x0F	; 15
  2a2:	01 97       	sbiw	r24, 0x01	; 1
