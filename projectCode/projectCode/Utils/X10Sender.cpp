@@ -121,6 +121,23 @@ void X10Sender::encodeData(char command)
 	
 }
 
+uint8_t[32] X10Sender::translateToManchesterCode(uint8_t dataArray[16])
+{
+	uint8_t manchesterArray[32];
+	
+	uint8_t manchesterI = 0;
+	
+	for (uint8_t i; i< 16; i++)
+	{
+		manchesterArray[manchesterI] = ~dataArray[i]
+		manchesterArray[manchesterI + 1] = dataArray[i]
+		
+		manchesterI += 2;
+	}
+	
+	
+}
+
 // Der er 100p en bedre måde at gøre det her på. Jeg magter bare ikke.
 // sikkert noget med at minus med antallet af bogstaver før A i ascii. idk. bøvlet.
 asciiTable X10Sender::asciiLookup_[] = {
