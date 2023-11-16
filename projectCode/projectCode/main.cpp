@@ -73,7 +73,6 @@ int main(void)
 			uint8_t nextBit = sender.getNextBit();
 			
 			DDRB |= (1 << PB5);
-			PORTB |= (1 << PB5);
 			
 			if (nextBit == 2) {
 				// Hvis der ikke skal ske noget, skal der sendes et 1 tal.
@@ -90,8 +89,7 @@ int main(void)
 				_delay_ms(1);
 			}
 			
-			DDRB |= (0 << PB5);
-			PORTB |= (0 << PB5);
+			DDRB &= (0 << PB5);
 						
 			interruptFlag = 0;
 		}

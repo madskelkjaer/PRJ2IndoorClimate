@@ -28,7 +28,7 @@ void X10Modtager::getNextBit(uint8_t nextBit)
 		nextManchesterArray[i] = manchesterArray_[i + 1];
 	}
 	
-	nextManchesterArray[32] = nextBit;
+	nextManchesterArray[31] = nextBit;
 	
 	// Der må være en smartere måde at gøre nedenstående på.
 	for (uint8_t i = 0; i < 32; i++)
@@ -43,7 +43,7 @@ bool X10Modtager::protocolAndAddressCorrect()
 {
 	int initiateProtocol[4] = {1,1,1,0};
 	
-	for (uint8_t i; i < 4; i++)
+	for (uint8_t i = 0; i < 4; i++)
 	{
 		if (!(dataArray_[i] == initiateProtocol[i]))
 		{

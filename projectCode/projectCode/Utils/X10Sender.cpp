@@ -129,8 +129,8 @@ void X10Sender::translateToManchesterCode()
 	uint8_t manchesterI = 0;
 	for (uint8_t i = 0; i< 16; i++)
 	{
-		manchesterArray_[manchesterI] = ~dataArray_[i];
-		manchesterArray_[manchesterI + 1] = dataArray_[i];
+		manchesterArray_[manchesterI] = dataArray_[i] == 0 ? 1 : 0;
+		manchesterArray_[manchesterI + 1] = dataArray_[i] == 0 ? 0 : 1;
 		
 		manchesterI += 2;
 	}

@@ -16,11 +16,10 @@ int main(void)
 	sei();
 	
 	// Sætter PORTB som input port.
-	DDRB |= (0 << PB5);
-	PORTB |= (0 << PB5);
-	
+	DDRB &= (0 << PB5); // Set PB5 as input
 	
 	UART uart;
+	uart.transmitString("KLAR!!!!");
 	
 	uint8_t recieverAddress[4] = {0,0,0,1};
 	
@@ -33,14 +32,21 @@ int main(void)
 		// Hvis vi ikke har fået interrupt, skal vi blot fortsætte.
 		if (interruptFlag == 0)
 		{
-			continue;	
+			continue;
 		}
 		
 		// Gem data ved interrupt.
-		uint8_t recievedBit = PORTB;
+		uint8_t recievedBit = PINB & (1 << PB5) ? 1 : 0;
+		DDRB |= (1 << PB5); // Sætter PB5 til output for at slukke den.
+		
+		if (recievedBit == 1) {
+			uart.transmitString("1 ");
+		} else {
+			uart.transmitString("0 ");
+		}
 		modtager.getNextBit(recievedBit);
 		
-		command = 'a';	
+		command = 'a';
 		if (modtager.protocolAndAddressCorrect()) {
 			command = modtager.getCommand();
 		}
@@ -63,6 +69,7 @@ int main(void)
 			// Halvt åbent vindue
 		}
 		
+		DDRB &= (0 << PB5); // Set PB5 as input
 		interruptFlag = 0;
     }
 }
