@@ -66,6 +66,7 @@ void X10Sender::sendData(char command, uint8_t address[4])
 	}
 	
 	this->encodeData(command);
+	this->translateToManchesterCode();
 }
 
 bool X10Sender::dataReady()
@@ -76,22 +77,25 @@ bool X10Sender::dataReady()
 uint8_t X10Sender::getNextBit()
 {
 	// Hvis vi er nået til enden af vores dataArray_ så sender vi bare 0'ere for resten.
-	if (currentBit_ >= 16 || dataReady_ == false) {
+	if (currentBit_ >= 32 || dataReady_ == false) 
+	{
 		dataReady_ = false;
 		return 2;
 	}
 	
-	uint8_t nextBit = dataArray_[currentBit_];
+	uint8_t nextBit = manchesterArray_[currentBit_];
 	currentBit_++;
 	return nextBit;
 }
 
-void X10Sender::enableTransmitter() {
+void X10Sender::enableTransmitter() 
+{
 	DDRB = 0b00100000; // Sætter PORTB (OC1A el. PB5) til output.
 	TRANSMITTER_TIMER = 66; // 120Khz
 }
 
-void X10Sender::disableTransmitter() {
+void X10Sender::disableTransmitter() 
+{
 	DDRB = 0b00000000; // Slukker PORTB.
 	TRANSMITTER_TIMER = 0;
 }
@@ -101,10 +105,10 @@ void X10Sender::encodeData(char command)
 	const int DATA_START = 8;
 	const int DATA_END = 16;
 	
-	for (uint8_t i = 0; i < 28; i++)
+	for (uint8_t i = 0; i < 27; i++) // Der er 26 bogstaver i alfabetet.
 	{
-		if (asciiLookup_[i].character == command) {
-			
+		if (asciiLookup_[i].character == command) 
+		{	
 			// Kopierer binært data fra lookup tabellen til dataArray fra index 8 og frem.
 			for (uint8_t j = DATA_START; j < DATA_END; j++)
 			{
@@ -118,24 +122,18 @@ void X10Sender::encodeData(char command)
 			return;
 		}
 	}
-	
 }
 
-uint8_t[32] X10Sender::translateToManchesterCode(uint8_t dataArray[16])
+void X10Sender::translateToManchesterCode()
 {
-	uint8_t manchesterArray[32];
-	
 	uint8_t manchesterI = 0;
-	
-	for (uint8_t i; i< 16; i++)
+	for (uint8_t i = 0; i< 16; i++)
 	{
-		manchesterArray[manchesterI] = ~dataArray[i]
-		manchesterArray[manchesterI + 1] = dataArray[i]
+		manchesterArray_[manchesterI] = ~dataArray_[i];
+		manchesterArray_[manchesterI + 1] = dataArray_[i];
 		
 		manchesterI += 2;
 	}
-	
-	
 }
 
 // Der er 100p en bedre måde at gøre det her på. Jeg magter bare ikke.

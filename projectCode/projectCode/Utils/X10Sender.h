@@ -33,10 +33,11 @@ public:
 private:
 	bool dataReady_;
 	uint8_t dataArray_[16];
+	uint8_t manchesterArray_[32];
 	uint8_t currentBit_;
 	uint8_t txPin_;
 	void encodeData(char command);
-	uint8_t[32] translateToManchesterCode(uint8_t dataArray[16]);
+	void translateToManchesterCode();
 	static asciiTable asciiLookup_[];
 }; //X10Sender
 
