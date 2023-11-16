@@ -16,51 +16,106 @@ X10Modtager::X10Modtager(uint8_t address[4])
 	{
 		address_[i] = address[i];
 	}
+	
 } //X10Modtager
 
-void X10Modtager::getNextBit()
+void X10Modtager::getNextBit(uint8_t nextBit)
 {
+	uint8_t nextManchesterArray[32];
 	
-}
-
-bool X10Modtager::dataReady()
-{
-	return dataReady_;
-}
-
-dataArray X10Modtager::getData()
-{
-	dataArray data;
-	for (uint8_t i = 0; i < 16; i++)
+	for (uint8_t i = 0; i < 31; i++)
 	{
-		data.array[i] = dataArray_[i];
+		nextManchesterArray[i] = manchesterArray_[i + 1];
 	}
 	
-	return data;
+	nextManchesterArray[32] = nextBit;
+	
+	// Der må være en smartere måde at gøre nedenstående på.
+	for (uint8_t i = 0; i < 32; i++)
+	{
+		manchesterArray_[i] = nextManchesterArray[i]; 
+	}
+	
+	this->translateFromManchesterCode();
+}
+
+bool X10Modtager::protocolAndAddressCorrect()
+{
+	int initiateProtocol[4] = {1,1,1,0};
+	
+	for (uint8_t i; i < 4; i++)
+	{
+		if (!(dataArray_[i] == initiateProtocol[i]))
+		{
+			return false;
+		}
+		
+		if (!(dataArray_[i+4] == address_[i]))
+		{
+			return false;
+		}
+	}
+	
+	return true;
 }
 
 char X10Modtager::getCommand()
 {
-	// Første 4 bits er for at melde ud af der er en besked på vej.
-	const int PROTOCOL_START = 0;
-	// de efterfølgende 4 bits er adressen på enheden vi vil snakke til.
-	const int ADDRESS_START = 4;
-	//
-	const int 
-	
-	// Protokollen starter altid med følgende bits.
-	int initiateProtocol[4] = {1,1,1,0};
-	
-	// Lægger dem i dataArray, så de kan blive sendt.
-	for (uint8_t i = 0; i < 4; i++)
+	uint8_t command[8];
+	const uint8_t DATA_START = 8;
+	const uint8_t DATA_END = 16;
+		
+	for (uint8_t j = DATA_START; j < DATA_END; j++)
 	{
-		dataArray_[i + PROTOCOL_START] = initiateProtocol[i];
-		dataArray_[i + ADDRESS_START] = address[i];
+		command[j - DATA_START] = dataArray_[j];
 	}
-	return 'O';
+	
+	for (uint8_t i = 0; i < 27; i++) // Der er 26 bogstaver i alfabetet.
+	{
+		if (this->arraysEqual(asciiLookup_[i].binary, command))
+		{
+			return asciiLookup_[i].character;
+		}
+	}
+	
+	return 'a';
 }
 
+void X10Modtager::translateFromManchesterCode()
+{
+	manchesterError_ = false;
 
+	const uint8_t manchesterArraySize = 32; // Assuming size is 32
+	uint8_t dataArrayI = 0;
+
+	for (uint8_t i = 0; i < manchesterArraySize - 1; i += 2)
+	{
+		if (manchesterArray_[i] == 0 && manchesterArray_[i + 1] == 1)
+		{
+			dataArray_[dataArrayI] = 1;
+		}
+		else if (manchesterArray_[i] == 1 && manchesterArray_[i + 1] == 0)
+		{
+			dataArray_[dataArrayI] = 0;
+		}
+		else
+		{
+			manchesterError_ = true;
+		}
+		
+		dataArrayI++;
+	}
+}
+
+bool X10Modtager::arraysEqual(uint8_t arr1[8], uint8_t arr2[8])
+{
+    for (int i = 0; i < 8; i++) {
+	    if (arr1[i] != arr2[i]) {
+		    return false;
+	    }
+    }
+    return true;
+}
 
 asciiTable X10Modtager::asciiLookup_[] = {
 	{'A', {0,1,0,0,0,0,0,1}},

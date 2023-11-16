@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 000000c8  00000000  00000000  00000838  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001c87  00000000  00000000  00000900  2**0
+  6 .debug_info   00001c47  00000000  00000000  00000900  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001162  00000000  00000000  00002587  2**0
+  7 .debug_abbrev 00001162  00000000  00000000  00002547  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000826  00000000  00000000  000036e9  2**0
+  8 .debug_line   00000826  00000000  00000000  000036a9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000001b8  00000000  00000000  00003f10  2**2
+  9 .debug_frame  000001b8  00000000  00000000  00003ed0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000009aa  00000000  00000000  000040c8  2**0
+ 10 .debug_str    00000979  00000000  00000000  00004088  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000066f  00000000  00000000  00004a72  2**0
+ 11 .debug_loc    0000066f  00000000  00000000  00004a01  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000b0  00000000  00000000  000050e1  2**0
+ 12 .debug_ranges 000000b0  00000000  00000000  00005070  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -649,13 +649,14 @@ uint8_t X10Sender::getNextBit()
 {
  36c:	fc 01       	movw	r30, r24
 	// Hvis vi er nået til enden af vores dataArray_ så sender vi bare 0'ere for resten.
-	if (currentBit_ >= 32 || dataReady_ == false) {
+	if (currentBit_ >= 32 || dataReady_ == false) 
  36e:	91 a9       	ldd	r25, Z+49	; 0x31
  370:	90 32       	cpi	r25, 0x20	; 32
  372:	18 f4       	brcc	.+6      	; 0x37a <_ZN9X10Sender10getNextBitEv+0xe>
  374:	80 81       	ld	r24, Z
  376:	81 11       	cpse	r24, r1
  378:	03 c0       	rjmp	.+6      	; 0x380 <_ZN9X10Sender10getNextBitEv+0x14>
+	{
 		dataReady_ = false;
  37a:	10 82       	st	Z, r1
 		return 2;
@@ -678,7 +679,8 @@ uint8_t X10Sender::getNextBit()
 
 00000390 <_ZN9X10Sender17enableTransmitterEv>:
 
-void X10Sender::enableTransmitter() {
+void X10Sender::enableTransmitter() 
+{
 	DDRB = 0b00100000; // Sætter PORTB (OC1A el. PB5) til output.
  390:	80 e2       	ldi	r24, 0x20	; 32
  392:	84 b9       	out	0x04, r24	; 4
@@ -692,7 +694,8 @@ void X10Sender::enableTransmitter() {
 000003a2 <_ZN9X10Sender18disableTransmitterEv>:
 }
 
-void X10Sender::disableTransmitter() {
+void X10Sender::disableTransmitter() 
+{
 	DDRB = 0b00000000; // Slukker PORTB.
  3a2:	14 b8       	out	0x04, r1	; 4
 	TRANSMITTER_TIMER = 0;
@@ -709,12 +712,12 @@ void X10Sender::encodeData(char command)
 	const int DATA_START = 8;
 	const int DATA_END = 16;
 	
-	for (uint8_t i = 0; i < 28; i++)
+	for (uint8_t i = 0; i < 27; i++) // Der er 26 bogstaver i alfabetet.
  3b0:	90 e0       	ldi	r25, 0x00	; 0
- 3b2:	9c 31       	cpi	r25, 0x1C	; 28
+ 3b2:	9b 31       	cpi	r25, 0x1B	; 27
  3b4:	70 f5       	brcc	.+92     	; 0x412 <__LOCK_REGION_LENGTH__+0x12>
 	{
-		if (asciiLookup_[i].character == command) {
+		if (asciiLookup_[i].character == command) 
  3b6:	29 2f       	mov	r18, r25
  3b8:	30 e0       	ldi	r19, 0x00	; 0
  3ba:	41 e1       	ldi	r20, 0x11	; 17
@@ -729,7 +732,7 @@ void X10Sender::encodeData(char command)
  3cc:	46 13       	cpse	r20, r22
  3ce:	1f c0       	rjmp	.+62     	; 0x40e <__LOCK_REGION_LENGTH__+0xe>
  3d0:	88 e0       	ldi	r24, 0x08	; 8
-			
+		{	
 			// Kopierer binært data fra lookup tabellen til dataArray fra index 8 og frem.
 			for (uint8_t j = DATA_START; j < DATA_END; j++)
  3d2:	80 31       	cpi	r24, 0x10	; 16
@@ -757,10 +760,10 @@ void X10Sender::encodeData(char command)
  3fa:	e6 0f       	add	r30, r22
  3fc:	f7 1f       	adc	r31, r23
  3fe:	91 83       	std	Z+1, r25	; 0x01
-	for (uint8_t i = 0; i < 28; i++)
+	for (uint8_t i = 0; i < 27; i++) // Der er 26 bogstaver i alfabetet.
 	{
-		if (asciiLookup_[i].character == command) {
-			
+		if (asciiLookup_[i].character == command) 
+		{	
 			// Kopierer binært data fra lookup tabellen til dataArray fra index 8 og frem.
 			for (uint8_t j = DATA_START; j < DATA_END; j++)
  400:	8f 5f       	subi	r24, 0xFF	; 255
@@ -784,7 +787,7 @@ void X10Sender::encodeData(char command)
 	const int DATA_START = 8;
 	const int DATA_END = 16;
 	
-	for (uint8_t i = 0; i < 28; i++)
+	for (uint8_t i = 0; i < 27; i++) // Der er 26 bogstaver i alfabetet.
  40e:	9f 5f       	subi	r25, 0xFF	; 255
  410:	d0 cf       	rjmp	.-96     	; 0x3b2 <_ZN9X10Sender10encodeDataEc+0x4>
  412:	08 95       	ret
