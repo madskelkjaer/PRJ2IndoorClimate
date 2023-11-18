@@ -80,7 +80,7 @@ uint8_t X10Sender::getNextBit()
 	if (currentBit_ >= 32 || dataReady_ == false) 
 	{
 		dataReady_ = false;
-		return 2;
+		return 0;
 	}
 	
 	uint8_t nextBit = manchesterArray_[currentBit_];

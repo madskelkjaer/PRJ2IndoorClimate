@@ -27,14 +27,15 @@ SODA::SODA() :
 
 void SODA::start()
 {
+	uint8_t numAverage = 3;
 	while(true)
 	{
-		collectData();
+		collectData(numAverage);
 		printData();
 
-		uint8_t intervalInMinutes = collectionInterval_ * 60000;
+		uint32_t intervalInMS = collectionInterval_ * 60000;
 
-		for (uint8_t i=1; i<intervalInMinutes; i++)
+		for (uint32_t i=1; i<intervalInMS; i++)
 		{
 			_delay_ms(1);
 		}
@@ -46,10 +47,8 @@ void SODA::setInterval(uint8_t intervalMinutes)
 	collectionInterval_ = intervalMinutes;
 }
 
-void SODA::collectData()
-{
-	uint8_t numAverage = 3;
-	
+void SODA::collectData(uint8_t numAverage)
+{	
 	float co2_sum = 0;
 	float temp_sum = 0;
 	float hum_sum = 0;
@@ -73,6 +72,17 @@ void SODA::collectData()
 void SODA::printData()
 {
 	char buffer[100];
-	sprintf(buffer, "C: %.2f T: %.2f H: %.2f", co2_, temperature_, humidity_);
+
+	int co2 = (int)co2_;
+	int co2_decimal = (int)((co2_ - co2) * 100);
+	
+	int temp = (int)temperature_;
+	int temp_decimal = (int)((temperature_ - temp) * 100);
+	
+	int humidity = (int)humidity_;
+	int humidity_decimal = (int)((humidity_ - humidity) * 100);
+	
+	sprintf(buffer, "C: %d.%02d T: %d.%02d H: %d.%02d", co2, co2_decimal, temp, temp_decimal, humidity, humidity_decimal);
 	uart_.transmitString(buffer);
+	uart_.transmitString("\r\n");
 }

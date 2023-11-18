@@ -156,13 +156,25 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="controller.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="controller.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="testing_code.txt">
+    <Compile Include="SODAcollectorkode.txt">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="main1.txt">
+    <Compile Include="test-sdc30udenklasser.txt">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="test-sdc30.txt">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="test-x10sendermed120khz.txt">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Utils\I2C.cpp">
@@ -198,6 +210,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utils" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="test-x10sendermedPB5.txt">
+      <SubType>compile</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

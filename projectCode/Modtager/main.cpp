@@ -16,7 +16,7 @@ int main(void)
 	sei();
 	
 	// Sætter PORTB som input port.
-	DDRB &= (0 << PB5); // Set PB5 as input
+	DDRB &= ~(1 << PB5);
 	
 	UART uart;
 	uart.transmitString("KLAR!!!!");
@@ -27,50 +27,48 @@ int main(void)
 	
 	char command = 'a';
 	
-    while (1) 
-    {
-		// Hvis vi ikke har fået interrupt, skal vi blot fortsætte.
-		if (interruptFlag == 0)
+	uint8_t recievedBit = 0;
+    uint8_t bitChecker = 0; 
+	while (1) 
+    {		
+		if (interruptFlag == 1)
 		{
-			continue;
+			_delay_us(500);
+			recievedBit = PINB & (1 << PB5) ? 1 : 0;
+			
+			// Gem data ved interrupt.
+			/*if (recievedBit == 1) {
+				uart.transmitString("1 ");
+				} else {
+				uart.transmitString("0 ");
+			}*/
+			modtager.getNextBit(recievedBit);
+			
+			command = 'a';
+			if (modtager.protocolAndAddressCorrect()) {
+				command = modtager.getCommand();
+			}
+			
+			if (command == 'O')
+			{
+				uart.transmitString("MODTOG KOMMANDO O\r\n");
+				// Åben vindue.
+			}
+			
+			if (command == 'C')
+			{
+				uart.transmitString("MODTOG KOMMANDO C\r\n");
+				// Luk vindue
+			}
+			
+			if (command == 'H')
+			{
+				uart.transmitString("MODTOG KOMMANDO H\r\n");
+				// Halvt åbent vindue
+			}
+			
+			interruptFlag = 0;
 		}
-		
-		// Gem data ved interrupt.
-		uint8_t recievedBit = PINB & (1 << PB5) ? 1 : 0;
-		DDRB |= (1 << PB5); // Sætter PB5 til output for at slukke den.
-		
-		if (recievedBit == 1) {
-			uart.transmitString("1 ");
-		} else {
-			uart.transmitString("0 ");
-		}
-		modtager.getNextBit(recievedBit);
-		
-		command = 'a';
-		if (modtager.protocolAndAddressCorrect()) {
-			command = modtager.getCommand();
-		}
-		
-		if (command == 'O')
-		{
-			uart.transmitString("MODTOG KOMMANDO O");
-			// Åben vindue.
-		}
-		
-		if (command == 'C')
-		{
-			uart.transmitString("MODTOG KOMMANDO C");
-			// Luk vindue
-		}
-		
-		if (command == 'H')
-		{
-			uart.transmitString("MODTOG KOMMANDO H");
-			// Halvt åbent vindue
-		}
-		
-		DDRB &= (0 << PB5); // Set PB5 as input
-		interruptFlag = 0;
     }
 }
 

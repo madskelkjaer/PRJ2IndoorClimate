@@ -21,7 +21,7 @@ public:
 	SODA();
 	void start();
 	void setInterval(uint8_t intervalMinutes);
-	void collectData();
+	void collectData(uint8_t numAverage);
 	void printData();
 	
 private:
