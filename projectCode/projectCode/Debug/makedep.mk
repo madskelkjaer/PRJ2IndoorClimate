@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+controller.cpp
+
 main.cpp
 
 Utils\I2C.cpp

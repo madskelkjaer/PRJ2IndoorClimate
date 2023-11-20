@@ -2,6 +2,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include <string.h>
 
 #include "Utils/UART.h"
 #include "Utils/X10Modtager.h"
@@ -28,7 +29,11 @@ int main(void)
 	char command = 'a';
 	
 	uint8_t recievedBit = 0;
-    uint8_t bitChecker = 0; 
+	uint8_t numRecieved = 0;
+	char buffer[10];
+	
+	_delay_us(5000);
+	
 	while (1) 
     {		
 		if (interruptFlag == 1)
@@ -53,6 +58,12 @@ int main(void)
 			{
 				uart.transmitString("MODTOG KOMMANDO O\r\n");
 				// Åben vindue.
+				numRecieved++;
+				
+				sprintf(buffer, "%i", numRecieved);
+				
+				uart.transmitString("Modtaget: ");
+				uart.transmitString(buffer);
 			}
 			
 			if (command == 'C')
