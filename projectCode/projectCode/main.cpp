@@ -1,17 +1,26 @@
-#define F_CPU 16000000
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include <util/delay.h>
-#include <stdio.h>
+
 // #include "Utils/SODA.h"
 
-#include "Utils/X10Sender.h"
-#include "Utils/UART.h"
+#include "Controller.h"
+
+X10Sender sender;
+reciever window = {sender, {0,0,0,1}};
 
 volatile int interruptFlag = 0;
 
 int main(void)
 {
+	// tænder interrupts.
+	EICRB |= (1 << ISC41) | (1 << ISC40); // Configure INT4 to trigger on rising edge
+	EIMSK |= (1 << INT4);                 // Enable INT4
+	sei();
+	
+	DDRB |= (1 << PB5);
+	
+	
+	
+	Controller controller;
+	
 	// tænder interrupts.
 	EICRB |= (1 << ISC41) | (1 << ISC40); // Configure INT4 to trigger on rising edge
 	EIMSK |= (1 << INT4);                 // Enable INT4
@@ -47,7 +56,7 @@ int main(void)
 			uart.transmitString(buffer);
 			uart.transmitString("\r\n");
 			
-			if (sendtNum == 100) {
+			if (sendtNum == 1000) {
 				return 0;	
 			}
 			
@@ -87,16 +96,13 @@ int main(void)
 		
 		if (interruptFlag == 1) {
 			uint8_t nextBit = sender.getNextBit();
+
+			sender.transmit(nextBit);
 			
 			if (nextBit == 1) {
 				uart.transmitString("1 ");
-				sender.enableTransmitter();
-				_delay_ms(1);
-				sender.disableTransmitter();
 				} else {
 				uart.transmitString("0 ");
-				sender.disableTransmitter();
-				_delay_ms(1);
 			}
 			
 			interruptFlag = 0;

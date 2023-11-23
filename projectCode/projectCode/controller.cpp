@@ -9,11 +9,11 @@
 #include "controller.h"
 
 // default constructor
-controller::controller()
+Controller::Controller()
 {
-} //controller
+}
 
-// default destructor
-controller::~controller()
+void Controller::start(bool debug)
 {
-} //~controller
+	
+}

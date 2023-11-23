@@ -9,23 +9,31 @@
 #ifndef __CONTROLLER_H__
 #define __CONTROLLER_H__
 
+#define F_CPU 16000000
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
 
-class controller
+#include "Utils/I2C.h"
+#include "Utils/SDC30.h"
+#include "Utils/UART.h"
+#include "Utils/X10Sender.h"
+
+struct reciever {
+	X10Sender com;
+	uint8_t windowAddress[4];
+};
+
+
+class Controller
 {
-//variables
 public:
+Controller();
+void start(bool debug);
 protected:
 private:
-
-//functions
-public:
-	controller();
-	~controller();
-protected:
-private:
-	controller( const controller &c );
-	controller& operator=( const controller &c );
-
 }; //controller
 
 #endif //__CONTROLLER_H__
+

@@ -149,6 +149,12 @@
     <Compile Include="main.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Utils\LEDDriver.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Utils\LEDDriver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Utils\UART.cpp">
       <SubType>compile</SubType>
     </Compile>

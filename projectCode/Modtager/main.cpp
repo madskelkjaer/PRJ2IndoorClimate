@@ -42,11 +42,11 @@ int main(void)
 			recievedBit = PINB & (1 << PB5) ? 1 : 0;
 			
 			// Gem data ved interrupt.
-			/*if (recievedBit == 1) {
+			if (recievedBit == 1) {
 				uart.transmitString("1 ");
 				} else {
 				uart.transmitString("0 ");
-			}*/
+			}
 			modtager.getNextBit(recievedBit);
 			
 			command = 'a';

@@ -4,8 +4,8 @@
 * Created: 02-11-2023 10:38:03
 * Author: madse
 */
-
-
+#define F_CPU 16000000
+#include <util/delay.h>
 #include "X10Sender.h"
 
 // default constructor
@@ -98,6 +98,18 @@ void X10Sender::disableTransmitter()
 {
 	DDRB = 0b00000000; // Slukker PORTB.
 	TRANSMITTER_TIMER = 0;
+}
+
+void X10Sender::transmit(uint8_t bit)
+{
+	if (bit == 1) {
+		this->enableTransmitter();
+		_delay_ms(1);
+		this->disableTransmitter();
+	} else {
+		this->disableTransmitter();
+		_delay_ms(1);
+	}
 }
 
 void X10Sender::encodeData(char command)

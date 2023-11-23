@@ -28,9 +28,10 @@ public:
 	void sendData(char command, uint8_t address[4]);
 	bool dataReady();
 	uint8_t getNextBit();
+	void transmit(uint8_t bit);
+private:
 	void enableTransmitter();
 	void disableTransmitter();
-private:
 	bool dataReady_;
 	uint8_t dataArray_[16];
 	uint8_t manchesterArray_[32];
