@@ -8,6 +8,9 @@ int main(void)
 {
 	Controller controller;
 	
+	controller.setActionValues('h', 25)
+	
+	
 	controller.start(DEBUG_MODE);
 	
 	

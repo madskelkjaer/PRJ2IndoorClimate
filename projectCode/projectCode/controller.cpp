@@ -10,6 +10,32 @@
 Controller::Controller()
 : i2cDriver_(), sdc30Driver_(SLAVE_ADDRESS), uartDriver_(), x10Driver_(), recieverAddress_({0,0,0,1})
 {
+	
+}
+
+void Controller::setActionValues(char key, uint8_t value)
+{
+	switch (key)
+	{
+		case 'h':
+		{
+			humidityTopValue_ = value;
+		}
+		break;
+		case 't':
+		{
+			temperatureTopValue_ = value;
+		}
+		break;
+		case 'c':
+		{
+			co2TopValue_ = value;
+		}
+		break;
+		default:
+		break;
+	}
+	
 }
 
 void Controller::start(bool debug = false) // default debugmode er false
