@@ -57,6 +57,20 @@ Discarded input sections
 
  .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
+ .text          0x00000000        0x0 Classes/TemperatureSensor.o
+ .data          0x00000000        0x0 Classes/TemperatureSensor.o
+ .bss           0x00000000        0x0 Classes/TemperatureSensor.o
+ .text._ZN17TemperatureSensorC2Ev
+                0x00000000        0x2 Classes/TemperatureSensor.o
+ .debug_info    0x00000000      0x148 Classes/TemperatureSensor.o
+ .debug_abbrev  0x00000000       0xeb Classes/TemperatureSensor.o
+ .debug_aranges
+                0x00000000       0x20 Classes/TemperatureSensor.o
+ .debug_ranges  0x00000000       0x10 Classes/TemperatureSensor.o
+ .debug_line    0x00000000       0x8a Classes/TemperatureSensor.o
+ .debug_str     0x00000000      0x1f1 Classes/TemperatureSensor.o
+ .comment       0x00000000       0x31 Classes/TemperatureSensor.o
+ .debug_frame   0x00000000       0x24 Classes/TemperatureSensor.o
  .text          0x00000000        0x0 controller.o
  .data          0x00000000        0x0 controller.o
  .bss           0x00000000        0x0 controller.o
@@ -318,6 +332,7 @@ Linker script and memory map
 
 Address of section .data set to 0x800200
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
+LOAD Classes/TemperatureSensor.o
 LOAD controller.o
 LOAD main.o
 LOAD Utils/I2C.o

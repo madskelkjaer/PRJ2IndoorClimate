@@ -156,6 +156,18 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Classes\SensorDriver.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Classes\SensorDriver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Classes\TemperatureSensor.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Classes\TemperatureSensor.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="controller.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -189,6 +201,9 @@
     <Compile Include="Utils\SDC30.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Utils\SensorClass.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Utils\SODA.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -209,6 +224,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Classes" />
     <Folder Include="Utils" />
   </ItemGroup>
   <ItemGroup>

@@ -227,6 +227,7 @@ Controller::Controller()
  154:	81 e0       	ldi	r24, 0x01	; 1
  156:	88 83       	st	Y, r24
 {
+	
 }
  158:	df 91       	pop	r29
  15a:	cf 91       	pop	r28
@@ -542,6 +543,9 @@ int main(void)
  2e8:	ce 01       	movw	r24, r28
  2ea:	01 96       	adiw	r24, 0x01	; 1
  2ec:	1b df       	rcall	.-458    	; 0x124 <_ZN10ControllerC1Ev>
+	
+	/*controller.setActionValues('h', 25)*/
+	
 	
 	controller.start(DEBUG_MODE);
  2ee:	61 e0       	ldi	r22, 0x01	; 1

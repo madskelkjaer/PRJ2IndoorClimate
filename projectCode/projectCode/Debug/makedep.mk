@@ -2,6 +2,10 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+Classes\SensorDriver.cpp
+
+Classes\TemperatureSensor.cpp
+
 controller.cpp
 
 main.cpp

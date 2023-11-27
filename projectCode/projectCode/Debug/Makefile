@@ -33,11 +33,14 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
+../Classes \
 ../Utils
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../Classes/SensorDriver.cpp \
+../Classes/TemperatureSensor.cpp \
 ../controller.cpp \
 ../main.cpp \
 ../Utils/I2C.cpp \
@@ -54,6 +57,8 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+Classes/SensorDriver.o \
+Classes/TemperatureSensor.o \
 controller.o \
 main.o \
 Utils/I2C.o \
@@ -63,6 +68,8 @@ Utils/UART.o \
 Utils/X10Sender.o
 
 OBJS_AS_ARGS +=  \
+Classes/SensorDriver.o \
+Classes/TemperatureSensor.o \
 controller.o \
 main.o \
 Utils/I2C.o \
@@ -72,6 +79,8 @@ Utils/UART.o \
 Utils/X10Sender.o
 
 C_DEPS +=  \
+Classes/SensorDriver.d \
+Classes/TemperatureSensor.d \
 controller.d \
 main.d \
 Utils/I2C.d \
@@ -81,6 +90,8 @@ Utils/UART.d \
 Utils/X10Sender.d
 
 C_DEPS_AS_ARGS +=  \
+Classes/SensorDriver.d \
+Classes/TemperatureSensor.d \
 controller.d \
 main.d \
 Utils/I2C.d \
@@ -103,6 +114,20 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+Classes/SensorDriver.o: ../Classes/SensorDriver.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Classes/TemperatureSensor.o: ../Classes/TemperatureSensor.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./controller.o: .././controller.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0

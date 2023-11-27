@@ -38,10 +38,6 @@ private:
 	X10Sender x10Driver_;
 	uint8_t recieverAddress_[4];
 	bool debug_;
-	
-	uint8_t humidityTopValue_;
-	uint8_t temperatureTopValue_;
-	uint8_t co2TopValue_;
 
 }; //controller
 

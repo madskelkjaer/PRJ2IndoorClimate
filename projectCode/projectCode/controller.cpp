@@ -13,31 +13,6 @@ Controller::Controller()
 	
 }
 
-void Controller::setActionValues(char key, uint8_t value)
-{
-	switch (key)
-	{
-		case 'h':
-		{
-			humidityTopValue_ = value;
-		}
-		break;
-		case 't':
-		{
-			temperatureTopValue_ = value;
-		}
-		break;
-		case 'c':
-		{
-			co2TopValue_ = value;
-		}
-		break;
-		default:
-		break;
-	}
-	
-}
-
 void Controller::start(bool debug = false) // default debugmode er false
 {
 	// tænder interrupts.
