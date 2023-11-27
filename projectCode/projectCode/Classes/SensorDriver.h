@@ -1,7 +1,7 @@
 /* 
 * SensorDriver.h
 *
-* Created: 27-11-2023 10:14:47
+* Created: 27-11-2023 17:02:22
 * Author: madse
 */
 
@@ -9,31 +9,19 @@
 #ifndef __SENSORDRIVER_H__
 #define __SENSORDRIVER_H__
 
-#include "../Utils/SensorClass.h"
-
+template <typename T>
 class SensorDriver
 {
 public:
 	SensorDriver();
-	void setSensorDriver(SensorClass driver);
-	
-	template <typename T>
-	T getSensorValue();
-	
-	template <typename T>
+	virtual T readValue();
 	void setMaxValue(T value);
-	
-	template <typename T>
 	void setMinValue(T value);
-	
-	template <typename T>
-	T GetMinValue();
-	
-	template <typename T>
-	T GetMaxValue();
+	T getMaxValue();
+	T getMinValue();
 protected:
-private:
-	SensorClass SensorDriver_;
+	T maxValue_;
+	T minValue_;
 }; //SensorDriver
 
 #endif //__SENSORDRIVER_H__

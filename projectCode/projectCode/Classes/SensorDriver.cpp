@@ -1,24 +1,39 @@
-/*
- * SensorDriver.cpp
- *
- * Created: 27-11-2023 11:38:30
- *  Author: madse
- */ 
+/* 
+* SensorDriver.cpp
+*
+* Created: 27-11-2023 17:02:21
+* Author: madse
+*/
+
+
 #include "SensorDriver.h"
 
-SensorDriver::SensorDriver()
+// default constructor
+template <typename T>
+SensorDriver<T>::SensorDriver()
 {
-	
-}
-
-void SensorDriver::setSensorDriver(SensorClass driver)
-{
-	SensorDriver_ = driver;
-}
-
+} //SensorDriver
 
 template <typename T>
-T SensorDriver::getSensorValue()
+void SensorDriver<T>::setMaxValue(T value)
 {
-	return SensorDriver_.readSensor();
+	maxValue_ = value;
+}
+
+template <typename T>
+void SensorDriver<T>::setMinValue(T value)
+{
+	minValue_ = value;
+}
+
+template <typename T>
+T SensorDriver<T>::getMaxValue()
+{
+	return maxValue_;
+}
+
+template <typename T>
+T SensorDriver<T>::getMinValue()
+{
+	return minValue_;
 }

@@ -32,8 +32,8 @@ public:
 	double getCo2();
 	double getTemperature();
 	double getHumidity();
-private:
 	bool ready();
+private:
 	dataArray data_;
 	uint8_t address_;
 	uint8_t writeAddress_;

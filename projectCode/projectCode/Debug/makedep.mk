@@ -2,9 +2,11 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+Classes\HumiditySensorDriver.cpp
+
 Classes\SensorDriver.cpp
 
-Classes\TemperatureSensor.cpp
+Classes\TemperatureSensorDriver.cpp
 
 controller.cpp
 
