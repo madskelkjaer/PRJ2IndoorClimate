@@ -9,30 +9,30 @@
 #include "SensorDriver.h"
 
 // default constructor
-template <typename T>
+template <class T>
 SensorDriver<T>::SensorDriver()
 {
 } //SensorDriver
 
-template <typename T>
+template <class T>
 void SensorDriver<T>::setMaxValue(T value)
 {
 	maxValue_ = value;
 }
 
-template <typename T>
+template <class T>
 void SensorDriver<T>::setMinValue(T value)
 {
 	minValue_ = value;
 }
 
-template <typename T>
+template <class T>
 T SensorDriver<T>::getMaxValue()
 {
 	return maxValue_;
 }
 
-template <typename T>
+template <class T>
 T SensorDriver<T>::getMinValue()
 {
 	return minValue_;

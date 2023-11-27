@@ -1,7 +1,6 @@
 #include "Controller.h"
 
-#include "Classes/HumiditySensorDriver.h"
-
+#include "HumiditySensorDriver.h"
 #include "Utils/UART.h"
 
 
@@ -22,11 +21,11 @@ int main(void)
 	// Controller controller;
 	// controller.start(DEBUG_MODE);
 	
+	UART uart;
+	
 	HumiditySensorDriver humiditySensor;
 	humiditySensor.setMaxValue(60.0);
 	humiditySensor.setMinValue(30.0);
-	
-	UART uart;
 	
 	char buffer_string[4];
 	double measurement;

@@ -11,7 +11,7 @@
 
 #include <avr/io.h>
 #include "SensorDriver.h"
-#include "../Utils/SDC30.h"
+#include "./Utils/UART.h"
 
 class TemperatureSensorDriver : public SensorDriver<double>
 {

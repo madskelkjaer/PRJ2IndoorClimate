@@ -2,15 +2,15 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+Classes\HumiditySensorDriver.cpp
+
+Classes\SensorDriver.cpp
+
+Classes\TemperatureSensorDriver.cpp
+
 controller.cpp
 
-HumiditySensorDriver.cpp
-
 main.cpp
-
-SensorDriver.cpp
-
-TemperatureSensorDriver.cpp
 
 Utils\I2C.cpp
 

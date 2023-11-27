@@ -4,8 +4,6 @@
 * Created: 27-11-2023 17:19:50
 * Author: madse
 */
-
-
 #include "TemperatureSensorDriver.h"
 
 // default constructor

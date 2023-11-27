@@ -9,7 +9,7 @@
 #ifndef __SENSORDRIVER_H__
 #define __SENSORDRIVER_H__
 
-template <typename T>
+template <class T>
 class SensorDriver
 {
 public:

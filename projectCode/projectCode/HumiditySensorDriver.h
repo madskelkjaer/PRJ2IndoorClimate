@@ -11,7 +11,7 @@
 
 #include <avr/io.h>
 #include "SensorDriver.h"
-#include "../Utils/SDC30.h"
+#include "Utils/SDC30.h"
 
 class HumiditySensorDriver: public SensorDriver<double>
 {
@@ -21,7 +21,6 @@ public:
 protected:
 private:
 	SDC30 sensor_;
-
 }; //HumiditySensorDriver
 
 #endif //__HUMIDITYSENSORDRIVER_H__
