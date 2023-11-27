@@ -146,7 +146,16 @@
     <Compile Include="CPPFile1.txt">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="mainLEDtest.txt">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Utils\LedDriver.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Utils\LedDriver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Utils\UART.cpp">

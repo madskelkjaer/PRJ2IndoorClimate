@@ -6,6 +6,7 @@
 
 #include "Utils/UART.h"
 #include "Utils/X10Modtager.h"
+#include "Utils/LedDriver.h"
 
 volatile int interruptFlag = 0;
 
@@ -19,12 +20,18 @@ int main(void)
 	// Sætter PORTB som input port.
 	DDRB &= ~(1 << PB5);
 	
+	DDRB |= (1 << PB4);
+	DDRB |= (1 << PB6); // Output porte til LED'er.
+	DDRB |= (1 << PB7);
+	
 	UART uart;
 	uart.transmitString("KLAR!!!!");
 	
 	uint8_t recieverAddress[4] = {0,0,0,1};
 	
 	X10Modtager modtager(recieverAddress);
+	
+	LedDriver led;
 	
 	char command = 'a';
 	
@@ -59,6 +66,7 @@ int main(void)
 				uart.transmitString("MODTOG KOMMANDO O\r\n");
 				// Åben vindue.
 				numRecieved++;
+				led.LEDopen();
 				
 				sprintf(buffer, "%i", numRecieved);
 				
@@ -70,12 +78,14 @@ int main(void)
 			{
 				uart.transmitString("MODTOG KOMMANDO C\r\n");
 				// Luk vindue
+				led.LEDclosed();
 			}
 			
 			if (command == 'H')
 			{
 				uart.transmitString("MODTOG KOMMANDO H\r\n");
 				// Halvt åbent vindue
+				led.LEDhalf();
 			}
 			
 			interruptFlag = 0;

@@ -39,7 +39,7 @@ int main(void)
 	while(true)
 	{
 		if (!sender.dataReady()) {
-			sender.sendData('O', windowAddress);
+			/*sender.sendData('O', windowAddress);
 			sendtNum++;
 			
 			sprintf(buffer, "%i", sendtNum);
@@ -50,8 +50,8 @@ int main(void)
 			if (sendtNum == 100) {
 				return 0;	
 			}
-			
-			/*uart.transmitString("\r\n\nKlar til næste kommando");
+			*/
+			uart.transmitString("\r\n\nKlar til næste kommando");
 			recievedChar = uart.recieve();
 			switch (recievedChar)
 			{
@@ -82,7 +82,7 @@ int main(void)
 					uart.transmitString("m - Denne menu\r\n");
 				}
 				break;
-			}*/
+			}
 		}
 		
 		if (interruptFlag == 1) {

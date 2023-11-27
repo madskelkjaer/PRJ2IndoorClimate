@@ -1,0 +1,29 @@
+/*
+ * main.cpp
+ *
+ * Created: 27-11-2023 13:37:38
+ *  Author: madse
+ */
+
+#define F_CPU 16000000
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main()
+{
+	DDRB = 0b11111111;
+	
+	while(true)
+	{
+		PORTB |= (1<<PB4);
+		_delay_ms(1000);
+		PORTB &= ~(1<<PB4);
+		PORTB |= (1<<PB6);
+		_delay_ms(1000);
+		PORTB &= ~(1<<PB6);
+		PORTB |= (1<<PB7);
+		_delay_ms(1000);
+		PORTB &= ~(1<<PB7);
+	}
+	
+}
