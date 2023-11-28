@@ -8,24 +8,15 @@
 
 #ifndef __LEDDRIVER_H__
 #define __LEDDRIVER_H__
-
+#include <avr/io.h>
 
 class LEDDriver
 {
-//variables
-public:
-protected:
-private:
-
-//functions
 public:
 	LEDDriver();
-	~LEDDriver();
+	void LEDon(uint8_t led)
 protected:
 private:
-	LEDDriver( const LEDDriver &c );
-	LEDDriver& operator=( const LEDDriver &c );
-
 }; //LEDDriver
 
 #endif //__LEDDRIVER_H__

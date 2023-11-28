@@ -11,6 +11,7 @@ volatile int interruptFlag = 0;
 
 int main(void)
 {
+	cli();
 	// tænder interrupts.
 	EICRB |= (1 << ISC41) | (1 << ISC40); // Configure INT4 to trigger on rising edge
 	EIMSK |= (1 << INT4);                 // Enable INT4

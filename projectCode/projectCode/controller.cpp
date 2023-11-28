@@ -15,10 +15,29 @@ Controller::Controller()
 
 void Controller::start(debugTypes debug = NONE) // default debugmode er false
 {
+	cli();
 	// tænder interrupts.
 	EICRB |= (1 << ISC41) | (1 << ISC40); // Configure INT4 to trigger on rising edge
 	EIMSK |= (1 << INT4);                 // Enable INT4
+	
+	// Bruger timer4 med
+	// prescaler 1024
+	// til at aktivere en interrupt hvert minut til aflæsening af 
+	TCCR4A = 0;
+	TCCR4B = 0;
+	TCCR4B |= (1 << WGM42) | (1 << CS42) | (1 << CS40); // CTC mode, Prescaler 1024
+	
+	TCNT4 = 0;
+	
+	// Set compare match register for 1hz increments
+	OCR4A = 15624; // = 16000000 / (1024 * 1) - 1 (must be <65536)
+	
+	// Enable Timer4 compare interrupt
+	TIMSK4 |= (1 << OCIE4A);
+	
 	sei();
+	
+	
 	
 	// Tænder output PB5.
 	DDRB |= (1 << PB5);

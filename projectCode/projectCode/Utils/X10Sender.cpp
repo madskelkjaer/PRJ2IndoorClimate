@@ -90,15 +90,15 @@ uint8_t X10Sender::getNextBit()
 void X10Sender::enableTransmitter()
 {
 	DDRB = 0b00100000; // Sætter PORTB (OC1A el. PB5) til output.
-	PORTB |= (1 << PB5);  // Set PB5 high
-	// TRANSMITTER_TIMER = 66; // 120Khz
+	// PORTB |= (1 << PB5);  // Set PB5 high
+	TRANSMITTER_TIMER = 66; // 120Khz
 }
 
 void X10Sender::disableTransmitter()
 {
 	DDRB = 0b00000000; // Slukker PORTB.
-	PORTB &= ~(1 << PB5); // Clear PB5 to low after transmission
-	// TRANSMITTER_TIMER = 0;
+	// PORTB &= ~(1 << PB5); // Clear PB5 to low after transmission
+	TRANSMITTER_TIMER = 0;
 }
 
 void X10Sender::transmit(uint8_t bit)
