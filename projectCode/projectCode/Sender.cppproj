@@ -156,43 +156,28 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Classes\HumiditySensorDriver.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Classes\HumiditySensorDriver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Classes\SensorDriverTemplate.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Classes\TemperatureSensorDriver.cpp.txt">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Classes\TemperatureSensorDriver.h.txt">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="controller.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="controller.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="HumiditySensorDriver.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HumiditySensorDriver.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SensorDriver.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SensorDriver.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SODAcollectorkode.txt">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="TemperatureSensorDriver.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="TemperatureSensorDriver.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="test-sdc30udenklasser.txt">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="test-sdc30.txt">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="test-x10sendermed120khz.txt">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Utils\I2C.cpp">
@@ -227,10 +212,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Classes" />
+    <Folder Include="TestFiles" />
     <Folder Include="Utils" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="test-x10sendermedPB5.txt">
+    <None Include="TestFiles\SODAcollectorkode.txt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="TestFiles\test-sdc30.txt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="TestFiles\test-sdc30udenklasser.txt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="TestFiles\test-x10sendermed120khz.txt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="TestFiles\test-x10sendermedPB5.txt">
       <SubType>compile</SubType>
     </None>
   </ItemGroup>

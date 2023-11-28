@@ -14,7 +14,6 @@ HumiditySensorDriver::HumiditySensorDriver()
 
 double HumiditySensorDriver::readValue()
 {
-	while (sensor_.ready() == false) {}; // venter indtil sensoren er klar.
 	sensor_.measure();
 	return sensor_.getHumidity();
 }

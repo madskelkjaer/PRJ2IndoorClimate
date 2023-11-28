@@ -44,7 +44,7 @@ int main(void)
 			// Gem data ved interrupt.
 			if (recievedBit == 1) {
 				uart.transmitString("1 ");
-				} else {
+			} else {
 				uart.transmitString("0 ");
 			}
 			modtager.getNextBit(recievedBit);

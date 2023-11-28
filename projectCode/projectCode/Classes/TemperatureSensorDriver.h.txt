@@ -10,10 +10,10 @@
 #define __TEMPERATURESENSORDRIVER_H__
 
 #include <avr/io.h>
-#include "SensorDriver.h"
-#include "./Utils/UART.h"
+#include "SensorDriverTemplate.h"
+#include "../Utils/SDC30.h"
 
-class TemperatureSensorDriver : public SensorDriver<double>
+class TemperatureSensorDriver : public SensorDriverTemplate<double>
 {
 public:
 	TemperatureSensorDriver();

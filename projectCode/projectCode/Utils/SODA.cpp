@@ -16,12 +16,6 @@ SODA::SODA() :
 	sdc30_(SLAVE_ADDRESS), uart_(),
 	co2_(0), temperature_(0), humidity_(0)
 {
-	SDC30 sdc(SLAVE_ADDRESS);
-	sdc30_ = sdc;
-	
-	UART uart;
-	uart_ = uart;
-	
 	// default collection_interval
 } //SODA
 

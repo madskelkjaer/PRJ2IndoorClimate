@@ -34,8 +34,7 @@ bool SDC30::ready()
 	i2c_.write(0x02);
 	i2c_.stop();
 	
-	_delay_ms(100); // afventer sensor i 100ms. Fundet i kode eksempel fra producenten.
-	// https://github.com/Sensirion/arduino-i2c-scd30/blob/master/src/SensirionI2cScd30.cpp#L52
+	_delay_ms(10); // afventer sensor i 10ms.
 	
 	i2c_.start();
 	i2c_.write(readAddress_);
@@ -73,7 +72,7 @@ void SDC30::measure()
 	uint8_t t_mmsb, t_mlsb, t_lmsb, t_llsb;
 	uint8_t h_mmsb, h_mlsb, h_lmsb, h_llsb;
 		
-	while(!this->ready()) {}
+	if (!this->ready()) { return; } // vi gider sku ikke til at vente.
 	
 	i2c_.start();
 	i2c_.write(writeAddress_);
@@ -83,7 +82,7 @@ void SDC30::measure()
 
 	i2c_.stop();
 	
-	_delay_ms(50); // Afventer sensor i 50ms.
+	_delay_ms(1); // Afventer sensor i 50ms.
 	
 	i2c_.start();
 	i2c_.write(readAddress_);

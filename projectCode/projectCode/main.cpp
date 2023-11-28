@@ -1,58 +1,50 @@
 #include "Controller.h"
 
-#include "HumiditySensorDriver.h"
+#include "Classes/HumiditySensorDriver.h"
 #include "Utils/UART.h"
 
-
-#define DEBUG_MODE true
+#define DEBUG_MODE COMMAND
 
 volatile int interruptFlag = 0;
 
-void float_to_string(char* buffer, double value)
-{
-	int integerPart = (int)value;
-	int decimalPart = (int)((value - integerPart) * 100);
-	
-	sprintf(buffer, "%d.%02d", integerPart, decimalPart);
-};
-
 int main(void)
 {
-	// Controller controller;
-	// controller.start(DEBUG_MODE);
+	Controller controller;
+	controller.start(DEBUG_MODE);
 	
-	UART uart;
+	uint8_t window1[4] = {0,0,0,1};
+	
+	controller.addWindow(window1);
 	
 	HumiditySensorDriver humiditySensor;
 	humiditySensor.setMaxValue(60.0);
 	humiditySensor.setMinValue(30.0);
 	
-	char buffer_string[4];
-	double measurement;
-	
 	while(true)
 	{
-		measurement = humiditySensor.readValue();
+		if (controller.debugMode() == WATCH) {
+			controller.printValue(humiditySensor.readValue());
+		}
 		
-		
-		uart.transmitString("\r\nHU:    ");
-		float_to_string(buffer_string, measurement);
-		uart.transmitString(buffer_string);
-		
-	}
-	
-	
-	return 0;
-	
-	/*while(true)
-	{	
 		if (interruptFlag == 1) {
+			/*double humidityProcentOff = humiditySensor.outsideLimits();
+			
+			if (humidityProcentOff < 10 && 0 < humidityProcentOff ) {
+				// Hvis vores measurement er under 10% af limits, så skal vi kun åbne vinduet halvt.
+				controller.windowsHalf();
+			} else if (humidityProcentOff > 10) {
+				// Hvis det er mere end 10%, så åbner vi vinduet helt.
+				controller.windowsOpen();
+			} else {
+				controller.windowsClosed();
+			}*/
+		
 			controller.interrupt();
 			controller.debugMenu();
 			interruptFlag = 0;
 		}
 		
-	}*/
+	}
 }
 
 ISR(INT4_vect) {

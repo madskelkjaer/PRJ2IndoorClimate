@@ -10,10 +10,10 @@
 #define __HUMIDITYSENSORDRIVER_H__
 
 #include <avr/io.h>
-#include "SensorDriver.h"
-#include "Utils/SDC30.h"
+#include "SensorDriverTemplate.h"
+#include "../Utils/SDC30.h"
 
-class HumiditySensorDriver: public SensorDriver<double>
+class HumiditySensorDriver: public SensorDriverTemplate<double>
 {
 public:
 	HumiditySensorDriver();

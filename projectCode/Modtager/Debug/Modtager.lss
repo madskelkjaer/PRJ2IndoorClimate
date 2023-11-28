@@ -309,7 +309,7 @@ int main(void)
  1b2:	01 96       	adiw	r24, 0x01	; 1
  1b4:	71 d0       	rcall	.+226    	; 0x298 <_ZN4UART14transmitStringEPKc>
  1b6:	05 c0       	rjmp	.+10     	; 0x1c2 <main+0x9e>
-				} else {
+			} else {
 				uart.transmitString("0 ");
  1b8:	6e ef       	ldi	r22, 0xFE	; 254
  1ba:	72 e0       	ldi	r23, 0x02	; 2
@@ -335,7 +335,7 @@ int main(void)
  1d6:	06 96       	adiw	r24, 0x06	; 6
  1d8:	53 d1       	rcall	.+678    	; 0x480 <_ZN11X10Modtager10getCommandEv>
  1da:	18 2f       	mov	r17, r24
-				} else {
+			} else {
 				uart.transmitString("0 ");
 			}
 			modtager.getNextBit(recievedBit);

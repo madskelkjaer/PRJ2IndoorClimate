@@ -23,14 +23,13 @@ X10Sender::X10Sender()
 	dataArray_[7] = 0;
 	
 	// PORTB er output.
-	DDRB = 0b00000000;
+	DDRB = 0b00100000;
 	
 	// Timer 1 til CTC mode.
 	// Prescaler = 1
 	// Toggle compare match.
 	TRANSMITTER_TIMER_A = 0b01000000;
 	TRANSMITTER_TIMER_B = 0b00001001;
-	
 	TRANSMITTER_TIMER = 0;
 	
 	// Pin som der bliver sendt 120kHz på.
@@ -88,20 +87,22 @@ uint8_t X10Sender::getNextBit()
 	return nextBit;
 }
 
-void X10Sender::enableTransmitter() 
+void X10Sender::enableTransmitter()
 {
 	DDRB = 0b00100000; // Sætter PORTB (OC1A el. PB5) til output.
-	TRANSMITTER_TIMER = 66; // 120Khz
+	PORTB |= (1 << PB5);  // Set PB5 high
+	// TRANSMITTER_TIMER = 66; // 120Khz
 }
 
-void X10Sender::disableTransmitter() 
+void X10Sender::disableTransmitter()
 {
 	DDRB = 0b00000000; // Slukker PORTB.
-	TRANSMITTER_TIMER = 0;
+	PORTB &= ~(1 << PB5); // Clear PB5 to low after transmission
+	// TRANSMITTER_TIMER = 0;
 }
 
 void X10Sender::transmit(uint8_t bit)
-{
+{	
 	if (bit == 1) {
 		this->enableTransmitter();
 		_delay_ms(1);
@@ -117,7 +118,7 @@ void X10Sender::encodeData(char command)
 	const int DATA_START = 8;
 	const int DATA_END = 16;
 	
-	for (uint8_t i = 0; i < 27; i++) // Der er 26 bogstaver i alfabetet.
+	for (uint8_t i = 0; i < 28; i++) // Der er 27 bogstaver i alfabet arrayet nedenfor.
 	{
 		if (asciiLookup_[i].character == command) 
 		{	
@@ -177,4 +178,5 @@ asciiTable X10Sender::asciiLookup_[] = {
 	{'X', {0,1,0,1,1,0,0,0}},
 	{'Y', {0,1,0,1,1,0,0,1}},
 	{'Z', {0,1,0,1,1,0,1,0}},
+	{'t', {1,1,1,1,1,1,1,1}}, // for tests.
 };

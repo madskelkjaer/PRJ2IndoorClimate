@@ -4,6 +4,8 @@
 
 main.cpp
 
+Utils\LEDDriver.cpp
+
 Utils\UART.cpp
 
 Utils\X10Modtager.cpp

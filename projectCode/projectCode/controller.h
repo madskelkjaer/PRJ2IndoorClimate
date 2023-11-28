@@ -15,30 +15,45 @@
 #include <util/delay.h>
 #include <stdio.h>
 
-#define SLAVE_ADDRESS 0x61
+#define MAX_RECIEVERS 10
 
-#include "Utils/I2C.h"
-#include "Utils/SDC30.h"
 #include "Utils/UART.h"
 #include "Utils/X10Sender.h"
+#include "Classes/SensorDriverTemplate.h"
+
+struct windows {
+	uint8_t address[4];
+};
+
+enum debugTypes {
+	COMMAND,
+	WATCH,
+	NONE
+};
 
 class Controller
 {
 public:
-Controller();
-void start(bool debug);
-void interrupt();
-bool debugMode();
-void debugMenu();
+	Controller();
+	void start(debugTypes debug);
+	void interrupt();
+	bool debugMode();
+	void debugMenu();
+	void addWindow(uint8_t address[4]);
+	void windowsOpen();
+	void windowsHalf();
+	void windowsClosed();
+	template <typename T>
+	void printValue(T value);
 protected:
 private:
-	I2C i2cDriver_;
-	SDC30 sdc30Driver_;
+	void sendCommandToAllWindows(char command);
 	UART uartDriver_;
 	X10Sender x10Driver_;
-	uint8_t recieverAddress_[4];
-	bool debug_;
-
+	uint8_t windowState_;
+	windows windows_[MAX_RECIEVERS];
+	uint8_t windowsInSystem_;
+	debugTypes debugMode_;
 }; //controller
 
 #endif //__CONTROLLER_H__

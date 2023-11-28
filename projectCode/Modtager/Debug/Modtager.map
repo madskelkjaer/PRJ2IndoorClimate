@@ -26,6 +26,22 @@ Discarded input sections
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
+ .text          0x00000000        0x0 Utils/LEDDriver.o
+ .data          0x00000000        0x0 Utils/LEDDriver.o
+ .bss           0x00000000        0x0 Utils/LEDDriver.o
+ .text._ZN9LEDDriverC2Ev
+                0x00000000        0x2 Utils/LEDDriver.o
+ .text._ZN9LEDDriverD2Ev
+                0x00000000        0x2 Utils/LEDDriver.o
+ .debug_info    0x00000000      0x173 Utils/LEDDriver.o
+ .debug_abbrev  0x00000000       0xf0 Utils/LEDDriver.o
+ .debug_aranges
+                0x00000000       0x28 Utils/LEDDriver.o
+ .debug_ranges  0x00000000       0x18 Utils/LEDDriver.o
+ .debug_line    0x00000000       0x63 Utils/LEDDriver.o
+ .debug_str     0x00000000      0x1d0 Utils/LEDDriver.o
+ .comment       0x00000000       0x31 Utils/LEDDriver.o
+ .debug_frame   0x00000000       0x34 Utils/LEDDriver.o
  .text          0x00000000        0x0 Utils/UART.o
  .data          0x00000000        0x0 Utils/UART.o
  .bss           0x00000000        0x0 Utils/UART.o
@@ -120,6 +136,7 @@ Linker script and memory map
 Address of section .data set to 0x800200
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
 LOAD main.o
+LOAD Utils/LEDDriver.o
 LOAD Utils/UART.o
 LOAD Utils/X10Modtager.o
 START GROUP
