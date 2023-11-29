@@ -13,7 +13,7 @@ Controller::Controller()
 	windowsInSystem_ = 0;
 }
 
-void Controller::start(debugTypes debug = NONE) // default debugmode er NONE
+void Controller::start(debugTypes debug = AUTO) // default debugmode er AUTO
 {
 	cli();
 	// tænder interrupts.
@@ -43,7 +43,7 @@ void Controller::start(debugTypes debug = NONE) // default debugmode er NONE
 	DDRB |= (1 << PB5);
 	
 	debugMode_ = debug;
-	if (debugMode_ == COMMAND)
+	if (this->debugMode() == COMMAND)
 	{
 		uartDriver_.transmitString("Menu:\r\n");
 		uartDriver_.transmitString("o - Aaben vindue\r\n");
@@ -58,19 +58,18 @@ void Controller::interrupt()
 	uint8_t nextBit = x10Driver_.getNextBit();
 	x10Driver_.transmit(nextBit);
 	
-	// Hvis debugmode er NONE, så skal vi returnere.
-	if (this->debugMode() == NONE) return;
+	// Hvis debugmode er AUTO, så skal vi returnere.
+	if (this->debugMode() == AUTO) { return; }
 	
 	// ellers skriver vi til output hvad der er sendt.
 	if (nextBit == 1) {
 		uartDriver_.transmitString(" 1 ");
-	} else {
+		} else {
 		uartDriver_.transmitString(" 0 ");
 	}
-	
 }
 
-bool Controller::debugMode()
+debugTypes Controller::debugMode()
 {
 	return debugMode_;
 }
@@ -127,7 +126,7 @@ void Controller::addWindow(uint8_t address[4])
 
 void Controller::sendCommandToAllWindows(char command)
 {
-	if (debugMode_ != NONE) { 
+	if (debugMode_ != AUTO) { 
 		uartDriver_.transmitString("\r\nSENDER ");
 		uartDriver_.transmit(command);
 		uartDriver_.transmitString("\r\n");

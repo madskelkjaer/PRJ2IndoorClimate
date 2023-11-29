@@ -35,7 +35,7 @@ int main(void)
 	// Hvad er MAX og MIN værdier for hvornår vinduet skal åbne?
 	humiditySensor.setMaxValue(60.0);
 	humiditySensor.setMinValue(30.0);
-	const uint8_t percentDeviationToHalfOpen = 10;
+	const uint8_t percentDeviationToHalfOpen = 20;
 	
 	// Starter uendelig løkke.
 	while(true)
@@ -51,7 +51,7 @@ int main(void)
 			if (humidityProcentOff < percentDeviationToHalfOpen && 0 < humidityProcentOff ) {
 				// Hvis vores measurement er under 10% af limits, så skal vi kun åbne vinduet halvt.
 				controller.windowsHalf();
-			} else if (humidityProcentOff > 10) {
+			} else if (humidityProcentOff > percentDeviationToHalfOpen) {
 				// Hvis det er mere end 10%, så åbner vi vinduet helt.
 				controller.windowsOpen();
 			} else {

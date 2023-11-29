@@ -29,7 +29,7 @@ struct windows {
 enum debugTypes {
 	COMMAND,
 	WATCH,
-	NONE
+	AUTO
 };
 
 class Controller
@@ -38,7 +38,7 @@ public:
 	Controller();
 	void start(debugTypes debug);
 	void interrupt();
-	bool debugMode();
+	debugTypes debugMode();
 	void debugMenu();
 	void addWindow(uint8_t address[4]);
 	void windowsOpen();
