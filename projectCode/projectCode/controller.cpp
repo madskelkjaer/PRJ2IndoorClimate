@@ -13,15 +13,16 @@ Controller::Controller()
 	windowsInSystem_ = 0;
 }
 
-void Controller::start(debugTypes debug = NONE) // default debugmode er false
+void Controller::start(debugTypes debug = NONE) // default debugmode er NONE
 {
 	cli();
 	// tænder interrupts.
-	EICRB |= (1 << ISC41) | (1 << ISC40); // Configure INT4 to trigger on rising edge
-	EIMSK |= (1 << INT4);                 // Enable INT4
+	EICRB |= (1 << ISC41) | (1 << ISC40); // INT4 skal trigger ved stigende kant.
+	EIMSK |= (1 << INT4);                 // Tænd INT4
 	
 	// Bruger timer4 med
 	// prescaler 1024
+	// CTC mode.
 	// til at aktivere en interrupt hvert minut til aflæsening af 
 	TCCR4A = 0;
 	TCCR4B = 0;
@@ -35,11 +36,10 @@ void Controller::start(debugTypes debug = NONE) // default debugmode er false
 	// Enable Timer4 compare interrupt
 	TIMSK4 |= (1 << OCIE4A);
 	
+	// Global tænd for interrupts.
 	sei();
 	
-	
-	
-	// Tænder output PB5.
+	// Tænder output PB5. Dette er vores data strøm til x.10 protokollen.
 	DDRB |= (1 << PB5);
 	
 	debugMode_ = debug;
@@ -56,7 +56,6 @@ void Controller::start(debugTypes debug = NONE) // default debugmode er false
 void Controller::interrupt()
 {
 	uint8_t nextBit = x10Driver_.getNextBit();
-	
 	x10Driver_.transmit(nextBit);
 	
 	// Hvis debugmode er NONE, så skal vi returnere.
@@ -80,10 +79,6 @@ void Controller::debugMenu()
 {
 	// Hvis debugmode ikke er commands, så skal vi returnere.
 	if (this->debugMode() != COMMAND) return;
-	
-	/*if (!x10Driver_.dataReady()) {
-		this->sendCommandToAllWindows('O');
-	}*/
 	
 	if (!x10Driver_.dataReady()) {
 		uartDriver_.transmitString("\r\n\nKlar til næste kommando");

@@ -9,6 +9,16 @@
 #ifndef __SENSORDRIVER_H__
 #define __SENSORDRIVER_H__
 
+/*
+SensorDriverTemplate
+
+Her ligger den template der skal bruges til at oprette nye sensorer klasser.
+Dette forenkler videreudviklingen af systemet da API'en er ens for alle.
+
+Det eneste man behøver at tage højde for, er at implementere den virtuelle T readValue(), samt at importere ens sensordrivver.
+*/
+
+
 template <class T>
 class SensorDriverTemplate
 {

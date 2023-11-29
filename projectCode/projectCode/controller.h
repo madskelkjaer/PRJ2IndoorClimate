@@ -15,6 +15,7 @@
 #include <util/delay.h>
 #include <stdio.h>
 
+// Antal vinduer der kan tilkobles systemet.
 #define MAX_RECIEVERS 10
 
 #include "Utils/UART.h"

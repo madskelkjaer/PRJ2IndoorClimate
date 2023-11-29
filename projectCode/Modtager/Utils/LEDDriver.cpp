@@ -1,19 +1,35 @@
-/* 
-* LEDDriver.cpp
+/*
+* LedDriver.cpp
 *
-* Created: 23-11-2023 11:28:27
+* Created: 27-11-2023 13:47:41
 * Author: madse
 */
 
 
-#include "LEDDriver.h"
+#include "LedDriver.h"
 
 // default constructor
-LEDDriver::LEDDriver()
+LedDriver::LedDriver()
 {
-} //LEDDriver
+} //LedDriver
 
-// default destructor
-LEDDriver::~LEDDriver()
+void LedDriver::LEDopen()
 {
-} //~LEDDriver
+	PORTB |= (1<<PB4);
+	PORTB &= ~(1<<PB6);
+	PORTB &= ~(1<<PB7);
+}
+
+void LedDriver::LEDhalf()
+{
+	PORTB |= (1<<PB6);
+	PORTB &= ~(1<<PB4);
+	PORTB &= ~(1<<PB7);
+}
+
+void LedDriver::LEDclosed()
+{
+	PORTB |= (1<<PB7);
+	PORTB &= ~(1<<PB6);
+	PORTB &= ~(1<<PB4);
+}

@@ -165,12 +165,6 @@
     <Compile Include="Classes\SensorDriverTemplate.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Classes\TemperatureSensorDriver.cpp.txt">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Classes\TemperatureSensorDriver.h.txt">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="controller.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -218,6 +212,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="TestFiles\SODAcollectorkode.txt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="TestFiles\TemperatureSensorDriver.cpp.txt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="TestFiles\TemperatureSensorDriver.h.txt">
       <SubType>compile</SubType>
     </None>
     <None Include="TestFiles\test-sdc30.txt">

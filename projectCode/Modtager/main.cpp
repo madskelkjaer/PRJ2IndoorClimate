@@ -6,19 +6,23 @@
 
 #include "Utils/UART.h"
 #include "Utils/X10Modtager.h"
+#include "Utils/LedDriver.h"
 
 volatile int interruptFlag = 0;
 
 int main(void)
 {
-	cli();
-	// tænder interrupts.
+	// t?nder interrupts.
 	EICRB |= (1 << ISC41) | (1 << ISC40); // Configure INT4 to trigger on rising edge
 	EIMSK |= (1 << INT4);                 // Enable INT4
 	sei();
 	
-	// Sætter PORTB som input port.
+	// S?tter PORTB som input port.
 	DDRB &= ~(1 << PB5);
+	
+	DDRB |= (1 << PB4);
+	DDRB |= (1 << PB6); // Output porte til LED'er.
+	DDRB |= (1 << PB7);
 	
 	UART uart;
 	uart.transmitString("KLAR!!!!");
@@ -26,6 +30,8 @@ int main(void)
 	uint8_t recieverAddress[4] = {0,0,0,1};
 	
 	X10Modtager modtager(recieverAddress);
+	
+	LedDriver led;
 	
 	char command = 'a';
 	
@@ -43,11 +49,11 @@ int main(void)
 			recievedBit = PINB & (1 << PB5) ? 1 : 0;
 			
 			// Gem data ved interrupt.
-			if (recievedBit == 1) {
+			/*if (recievedBit == 1) {
 				uart.transmitString("1 ");
-			} else {
+				} else {
 				uart.transmitString("0 ");
-			}
+			}*/
 			modtager.getNextBit(recievedBit);
 			
 			command = 'a';
@@ -58,9 +64,10 @@ int main(void)
 			if (command == 'O')
 			{
 				uart.transmitString("MODTOG KOMMANDO O\r\n");
-				// Åben vindue.
-				numRecieved++;
+				// ?ben vindue
+				led.LEDopen();
 				
+				numRecieved++;
 				sprintf(buffer, "%i", numRecieved);
 				
 				uart.transmitString("Modtaget: ");
@@ -71,12 +78,14 @@ int main(void)
 			{
 				uart.transmitString("MODTOG KOMMANDO C\r\n");
 				// Luk vindue
+				led.LEDclosed();
 			}
 			
 			if (command == 'H')
 			{
 				uart.transmitString("MODTOG KOMMANDO H\r\n");
-				// Halvt åbent vindue
+				// Halvt ?bent vindue
+				led.LEDhalf();
 			}
 			
 			interruptFlag = 0;

@@ -1,7 +1,7 @@
-/* 
-* LEDDriver.h
+/*
+* LedDriver.h
 *
-* Created: 23-11-2023 11:28:27
+* Created: 27-11-2023 13:47:41
 * Author: madse
 */
 
@@ -10,13 +10,15 @@
 #define __LEDDRIVER_H__
 #include <avr/io.h>
 
-class LEDDriver
+class LedDriver
 {
-public:
-	LEDDriver();
-	void LEDon(uint8_t led)
-protected:
-private:
-}; //LEDDriver
+	public:
+	LedDriver();
+	void LEDopen();
+	void LEDhalf();
+	void LEDclosed();
+	protected:
+	private:
+}; //LedDriver
 
 #endif //__LEDDRIVER_H__
