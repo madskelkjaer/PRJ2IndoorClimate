@@ -39,13 +39,11 @@ int main(void)
 	uint8_t numRecieved = 0;
 	char buffer[10];
 	
-	_delay_us(5000);
-	
 	while (1) 
     {		
 		if (interruptFlag == 1)
 		{
-			_delay_us(500);
+			_delay_us(300);
 			recievedBit = PINB & (1 << PB5) ? 1 : 0;
 			
 			// Gem data ved interrupt.

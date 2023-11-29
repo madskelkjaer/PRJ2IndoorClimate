@@ -9,7 +9,7 @@ NONE - Automatisk mode
 COMMAND - Tillader at sende kommandoer direkte fra terminal
 WATCH - Se hvad sensoren aflæser og hvad der bliver sendt
 */
-#define DEBUG_MODE WATCH
+#define DEBUG_MODE COMMAND
 
 // Hvor tit skal sensoren måle værdier? Helst over xx sekunder.
 #define MEASURE_EVERY_SECONDS 5
@@ -41,7 +41,7 @@ int main(void)
 	while(true)
 	{	
 		// Hvis measureFlag er blevet sat, skal vi aflæse værdier fra sensoren.
-		if (measureFlag == 1) {
+		if (measureFlag == 1 && controller.debugMode() == WATCH) {
 			if (controller.debugMode() == WATCH) {
 				controller.printValue(humiditySensor.readValue());
 			}
