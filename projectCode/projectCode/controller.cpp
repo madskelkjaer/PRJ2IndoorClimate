@@ -42,7 +42,10 @@ void Controller::start(debugTypes debug = AUTO) // default debugmode er AUTO
 	// Tænder output PB5. Dette er vores data strøm til x.10 protokollen.
 	DDRB |= (1 << PB5);
 	
-	debugMode_ = debug;
+	
+	this->setDebug(debug);
+	uartDriver_.transmitString("Skift debugmode med enten\r\n1 - AUTO\r\n2 - WATCH\r\n3 - COMMAND\r\n");
+	
 	if (this->debugMode() == COMMAND)
 	{
 		uartDriver_.transmitString("Menu:\r\n");
@@ -67,6 +70,11 @@ void Controller::interrupt()
 		} else {
 		uartDriver_.transmitString(" 0 ");
 	}
+}
+
+void Controller::setDebug(debugTypes debug)
+{
+	debugMode_ = debug;
 }
 
 debugTypes Controller::debugMode()

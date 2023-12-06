@@ -38,6 +38,7 @@ public:
 	Controller();
 	void start(debugTypes debug);
 	void interrupt();
+	void setDebug(debugTypes debug);
 	debugTypes debugMode();
 	void debugMenu();
 	void addWindow(uint8_t address[4]);
