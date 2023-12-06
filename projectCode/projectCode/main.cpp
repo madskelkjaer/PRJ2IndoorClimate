@@ -33,7 +33,7 @@ int main(void)
 	// Luftfugtighedssensor driver
 	HumiditySensorDriver humiditySensor;
 	// Hvad er MAX og MIN værdier for hvornår vinduet skal åbne?
-	humiditySensor.setMaxValue(60.0);
+	humiditySensor.setMaxValue(50.0);
 	humiditySensor.setMinValue(30.0);
 	const uint8_t percentDeviationToHalfOpen = 20;
 	
