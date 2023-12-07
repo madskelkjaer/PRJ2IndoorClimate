@@ -32,33 +32,24 @@ int main(void)
 	
 	char recievedChar;
 	char buffer[10];
-	uint8_t sendtNum = 0;
-	
-	_delay_ms(5000);
+	uint8_t sendtNum = 1;
 	
 	while(true)
 	{
 		if (!sender.dataReady()) {
-			/*sender.sendData('O', windowAddress);
-			sendtNum++;
-			
-			sprintf(buffer, "%i", sendtNum);
-			uart.transmitString("Sendt: ");
-			uart.transmitString(buffer);
-			uart.transmitString("\r\n");
-			
-			if (sendtNum == 100) {
-				return 0;	
-			}
-			*/
 			uart.transmitString("\r\n\nKlar til næste kommando");
 			recievedChar = uart.recieve();
 			switch (recievedChar)
 			{
 				case 'o':
 				{
-					uart.transmitString("Sender O\r\n");
+					uart.transmitString("Sender O - ");
 					sender.sendData('O', windowAddress);
+					sprintf(buffer, "%i", sendtNum);
+					uart.transmitString("Sendt: ");
+					uart.transmitString(buffer);
+					uart.transmitString("\r\n");
+					sendtNum++;
 				}
 				break;
 				case 'c':
