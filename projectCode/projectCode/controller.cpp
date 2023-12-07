@@ -14,7 +14,7 @@ Controller::Controller()
 	numSendt_ = 0;
 }
 
-void Controller::start(debugTypes debug = AUTO) // default debugmode er AUTO
+void Controller::start(debugTypes debug = NONE) // default debugmode er NONE
 {
 	cli();
 	// tænder interrupts.
@@ -43,9 +43,14 @@ void Controller::start(debugTypes debug = AUTO) // default debugmode er AUTO
 	// Tænder output PB5. Dette er vores data strøm til x.10 protokollen.
 	DDRB |= (1 << PB5);
 	
+<<<<<<< HEAD
 	
 	this->setDebug(debug);
 	if (this->debugMode() == COMMAND)
+=======
+	debugMode_ = debug;
+	if (debugMode_ == COMMAND)
+>>>>>>> parent of e186fd1 (eyo girl we er done med koden!!!)
 	{
 		uartDriver_.transmitString("Menu:\r\n");
 		uartDriver_.transmitString("o - Aaben vindue\r\n");
@@ -60,8 +65,8 @@ void Controller::interrupt()
 	uint8_t nextBit = x10Driver_.getNextBit();
 	x10Driver_.transmit(nextBit);
 	
-	// Hvis debugmode er AUTO, så skal vi returnere.
-	if (this->debugMode() == AUTO) { return; }
+	// Hvis debugmode er NONE, så skal vi returnere.
+	if (this->debugMode() == NONE) return;
 	
 	// ellers skriver vi til output hvad der er sendt.
 	if (nextBit == 1) {
@@ -69,14 +74,19 @@ void Controller::interrupt()
 	} else {
 		uartDriver_.transmitString(" 0 ");
 	}
+	
 }
 
+<<<<<<< HEAD
 void Controller::setDebug(debugTypes debug)
 {
 	debugMode_ = debug;
 }
 
 debugTypes Controller::debugMode()
+=======
+bool Controller::debugMode()
+>>>>>>> parent of e186fd1 (eyo girl we er done med koden!!!)
 {
 	return debugMode_;
 }
@@ -147,7 +157,7 @@ void Controller::addWindow(uint8_t address[4])
 
 void Controller::sendCommandToAllWindows(char command)
 {
-	if (debugMode_ != AUTO) { 
+	if (debugMode_ != NONE) { 
 		uartDriver_.transmitString("\r\nSENDER ");
 		uartDriver_.transmit(command);
 		uartDriver_.transmitString("\r\n");

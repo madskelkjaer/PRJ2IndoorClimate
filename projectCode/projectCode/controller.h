@@ -29,8 +29,12 @@ struct windows {
 enum debugTypes {
 	COMMAND,
 	WATCH,
+<<<<<<< HEAD
 	AUTO,
 	SEND
+=======
+	NONE
+>>>>>>> parent of e186fd1 (eyo girl we er done med koden!!!)
 };
 
 class Controller
@@ -39,8 +43,12 @@ public:
 	Controller();
 	void start(debugTypes debug);
 	void interrupt();
+<<<<<<< HEAD
 	void setDebug(debugTypes debug);
 	debugTypes debugMode();
+=======
+	bool debugMode();
+>>>>>>> parent of e186fd1 (eyo girl we er done med koden!!!)
 	void debugMenu();
 	void addWindow(uint8_t address[4]);
 	void windowsOpen();
