@@ -36,7 +36,7 @@ int main(void)
 	char command = 'a';
 	
 	uint8_t recievedBit = 0;
-	uint8_t numRecieved = 0;
+	uint8_t numRecieved = 1;
 	char buffer[10];
 	
 	_delay_us(5000);
@@ -63,15 +63,14 @@ int main(void)
 			
 			if (command == 'O')
 			{
-				uart.transmitString("MODTOG KOMMANDO O\r\n");
+				uart.transmitString("MODTOG KOMMANDO O - ");
 				// Åben vindue.
-				numRecieved++;
 				led.LEDopen();
-				
 				sprintf(buffer, "%i", numRecieved);
-				
 				uart.transmitString("Modtaget: ");
 				uart.transmitString(buffer);
+				uart.transmitString("\r\n");
+				numRecieved++;
 			}
 			
 			if (command == 'C')
