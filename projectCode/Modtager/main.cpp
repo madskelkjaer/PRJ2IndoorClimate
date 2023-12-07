@@ -65,11 +65,11 @@ int main(void)
 				// ?ben vindue
 				led.LEDopen();
 				
-				numRecieved++;
 				sprintf(buffer, "%i", numRecieved);
-				
 				uart.transmitString("Modtaget: ");
 				uart.transmitString(buffer);
+				numRecieved++;
+			
 			}
 			
 			if (command == 'C')

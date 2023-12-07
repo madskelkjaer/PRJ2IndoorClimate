@@ -11,6 +11,7 @@ Controller::Controller()
 : uartDriver_(), x10Driver_()
 {
 	windowsInSystem_ = 0;
+	numSendt_ = 0;
 }
 
 void Controller::start(debugTypes debug = AUTO) // default debugmode er AUTO
@@ -44,8 +45,6 @@ void Controller::start(debugTypes debug = AUTO) // default debugmode er AUTO
 	
 	
 	this->setDebug(debug);
-	uartDriver_.transmitString("Skift debugmode med enten\r\n1 - AUTO\r\n2 - WATCH\r\n3 - COMMAND\r\n");
-	
 	if (this->debugMode() == COMMAND)
 	{
 		uartDriver_.transmitString("Menu:\r\n");
@@ -67,7 +66,7 @@ void Controller::interrupt()
 	// ellers skriver vi til output hvad der er sendt.
 	if (nextBit == 1) {
 		uartDriver_.transmitString(" 1 ");
-		} else {
+	} else {
 		uartDriver_.transmitString(" 0 ");
 	}
 }
@@ -85,9 +84,23 @@ debugTypes Controller::debugMode()
 void Controller::debugMenu()
 {
 	// Hvis debugmode ikke er commands, så skal vi returnere.
-	if (this->debugMode() != COMMAND) return;
+	if (this->debugMode() != COMMAND || this->debugMode() != SEND) return;
+	
+	char buffer[10];
 	
 	if (!x10Driver_.dataReady()) {
+		if (this->debugMode() == SEND) {
+			if (numSendt_ < 100) {
+				this->sendCommandToAllWindows('O');
+				numSendt_++;
+				
+				sprintf(buffer, "%i", numSendt_);
+				uartDriver_.transmitString("Sendt: ");
+				uartDriver_.transmitString(buffer);
+				uartDriver_.transmitString("\r\n");	
+			}
+		}
+		
 		uartDriver_.transmitString("\r\n\nKlar til næste kommando");
 		switch (uartDriver_.recieve())
 		{

@@ -349,41 +349,41 @@ int main(void)
  1de:	ce 01       	movw	r24, r28
  1e0:	cb 96       	adiw	r24, 0x3b	; 59
  1e2:	4c d0       	rcall	.+152    	; 0x27c <_ZN9LedDriver7LEDopenEv>
- 1e4:	0f 5f       	subi	r16, 0xFF	; 255
+ 1e4:	1f 92       	push	r1
 				
-				numRecieved++;
- 1e6:	1f 92       	push	r1
 				sprintf(buffer, "%i", numRecieved);
- 1e8:	0f 93       	push	r16
- 1ea:	8f e0       	ldi	r24, 0x0F	; 15
- 1ec:	93 e0       	ldi	r25, 0x03	; 3
- 1ee:	9f 93       	push	r25
- 1f0:	8f 93       	push	r24
- 1f2:	7e 01       	movw	r14, r28
- 1f4:	9c e3       	ldi	r25, 0x3C	; 60
- 1f6:	e9 0e       	add	r14, r25
- 1f8:	f1 1c       	adc	r15, r1
- 1fa:	ff 92       	push	r15
- 1fc:	ef 92       	push	r14
- 1fe:	b9 d1       	rcall	.+882    	; 0x572 <sprintf>
-				
+ 1e6:	0f 93       	push	r16
+ 1e8:	8f e0       	ldi	r24, 0x0F	; 15
+ 1ea:	93 e0       	ldi	r25, 0x03	; 3
+ 1ec:	9f 93       	push	r25
+ 1ee:	8f 93       	push	r24
+ 1f0:	7e 01       	movw	r14, r28
+ 1f2:	9c e3       	ldi	r25, 0x3C	; 60
+ 1f4:	e9 0e       	add	r14, r25
+ 1f6:	f1 1c       	adc	r15, r1
+ 1f8:	ff 92       	push	r15
+ 1fa:	ef 92       	push	r14
+ 1fc:	ba d1       	rcall	.+884    	; 0x572 <sprintf>
 				uart.transmitString("Modtaget: ");
- 200:	62 e1       	ldi	r22, 0x12	; 18
- 202:	73 e0       	ldi	r23, 0x03	; 3
- 204:	ce 01       	movw	r24, r28
- 206:	01 96       	adiw	r24, 0x01	; 1
- 208:	67 d0       	rcall	.+206    	; 0x2d8 <_ZN4UART14transmitStringEPKc>
- 20a:	b7 01       	movw	r22, r14
+ 1fe:	62 e1       	ldi	r22, 0x12	; 18
+ 200:	73 e0       	ldi	r23, 0x03	; 3
+ 202:	ce 01       	movw	r24, r28
+ 204:	01 96       	adiw	r24, 0x01	; 1
+ 206:	68 d0       	rcall	.+208    	; 0x2d8 <_ZN4UART14transmitStringEPKc>
+ 208:	b7 01       	movw	r22, r14
 				uart.transmitString(buffer);
- 20c:	ce 01       	movw	r24, r28
- 20e:	01 96       	adiw	r24, 0x01	; 1
- 210:	63 d0       	rcall	.+198    	; 0x2d8 <_ZN4UART14transmitStringEPKc>
+ 20a:	ce 01       	movw	r24, r28
+ 20c:	01 96       	adiw	r24, 0x01	; 1
+ 20e:	64 d0       	rcall	.+200    	; 0x2d8 <_ZN4UART14transmitStringEPKc>
+ 210:	0f 5f       	subi	r16, 0xFF	; 255
  212:	0f 90       	pop	r0
+				numRecieved++;
  214:	0f 90       	pop	r0
  216:	0f 90       	pop	r0
  218:	0f 90       	pop	r0
  21a:	0f 90       	pop	r0
  21c:	0f 90       	pop	r0
+			
 			}
 			
 			if (command == 'C')
