@@ -52,6 +52,7 @@ private:
 	UART uartDriver_;
 	X10Sender x10Driver_;
 	uint8_t windowState_;
+	uint8_t numSendt_;
 	windows windows_[MAX_RECIEVERS];
 	uint8_t windowsInSystem_;
 	debugTypes debugMode_;

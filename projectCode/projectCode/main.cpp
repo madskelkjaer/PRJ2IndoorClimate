@@ -5,11 +5,12 @@
 
 /*
 *** Debug Modes ***
-NONE - Automatisk mode
+AUTO - Automatisk mode
 COMMAND - Tillader at sende kommandoer direkte fra terminal
 WATCH - Se hvad sensoren aflæser og hvad der bliver sendt
 */
-#define DEBUG_MODE WATCH
+#define DEBUG_MODE COMMAND
+
 
 // Hvor tit skal sensoren måle værdier? Helst over xx sekunder.
 #define MEASURE_EVERY_SECONDS 5
@@ -33,7 +34,7 @@ int main(void)
 	// Luftfugtighedssensor driver
 	HumiditySensorDriver humiditySensor;
 	// Hvad er MAX og MIN værdier for hvornår vinduet skal åbne?
-	humiditySensor.setMaxValue(60.0);
+	humiditySensor.setMaxValue(50.0);
 	humiditySensor.setMinValue(30.0);
 	const uint8_t percentDeviationToHalfOpen = 20;
 	

@@ -11,6 +11,7 @@ Controller::Controller()
 : uartDriver_(), x10Driver_()
 {
 	windowsInSystem_ = 0;
+	numSendt_ = 1;
 }
 
 void Controller::start(debugTypes debug = AUTO) // default debugmode er AUTO
@@ -78,6 +79,8 @@ void Controller::debugMenu()
 {
 	// Hvis debugmode ikke er commands, så skal vi returnere.
 	if (this->debugMode() != COMMAND) return;
+
+	char buffer[10];
 	
 	if (!x10Driver_.dataReady()) {
 		uartDriver_.transmitString("\r\n\nKlar til næste kommando");
@@ -86,6 +89,12 @@ void Controller::debugMenu()
 			case 'o':
 			{
 				this->sendCommandToAllWindows('O');
+				
+				sprintf(buffer, "%i", numSendt_);
+				uartDriver_.transmitString("Sendt: ");
+				uartDriver_.transmitString(buffer);
+				uartDriver_.transmitString("\r\n");
+				numSendt_++;
 			}
 			break;
 			case 'c':
