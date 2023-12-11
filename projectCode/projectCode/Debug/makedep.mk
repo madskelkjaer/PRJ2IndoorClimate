@@ -4,8 +4,6 @@
 
 Classes\HumiditySensorDriver.cpp
 
-controller.cpp
-
 main.cpp
 
 Utils\I2C.cpp

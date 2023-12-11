@@ -165,13 +165,10 @@
     <Compile Include="Classes\SensorDriverTemplate.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="controller.cpp">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="controller.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main.txt">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Utils\I2C.cpp">

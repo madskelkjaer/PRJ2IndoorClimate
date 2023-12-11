@@ -31,7 +31,6 @@ private:
 	double co2_;
 	double temperature_;
 	double humidity_;
-	
 }; //SODA
 
 #endif //__SODA_H__

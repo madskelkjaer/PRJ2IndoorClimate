@@ -41,7 +41,6 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../Classes/HumiditySensorDriver.cpp \
-../controller.cpp \
 ../main.cpp \
 ../Utils/I2C.cpp \
 ../Utils/SDC30.cpp \
@@ -58,7 +57,6 @@ ASM_SRCS +=
 
 OBJS +=  \
 Classes/HumiditySensorDriver.o \
-controller.o \
 main.o \
 Utils/I2C.o \
 Utils/SDC30.o \
@@ -68,7 +66,6 @@ Utils/X10Sender.o
 
 OBJS_AS_ARGS +=  \
 Classes/HumiditySensorDriver.o \
-controller.o \
 main.o \
 Utils/I2C.o \
 Utils/SDC30.o \
@@ -78,7 +75,6 @@ Utils/X10Sender.o
 
 C_DEPS +=  \
 Classes/HumiditySensorDriver.d \
-controller.d \
 main.d \
 Utils/I2C.d \
 Utils/SDC30.d \
@@ -88,7 +84,6 @@ Utils/X10Sender.d
 
 C_DEPS_AS_ARGS +=  \
 Classes/HumiditySensorDriver.d \
-controller.d \
 main.d \
 Utils/I2C.d \
 Utils/SDC30.d \
@@ -111,13 +106,6 @@ LINKER_SCRIPT_DEP+=
 
 # AVR32/GNU C Compiler
 Classes/HumiditySensorDriver.o: ../Classes/HumiditySensorDriver.cpp
-	@echo Building file: $<
-	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./controller.o: .././controller.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
