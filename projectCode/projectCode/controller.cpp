@@ -11,7 +11,6 @@ Controller::Controller()
 	: uartDriver_(), x10Driver_()
 {
 	windowsInSystem_ = 0;
-	numSendt_ = 1;
 }
 
 void Controller::start(debugTypes debug = NONE) // default debugmode er NONE
@@ -43,7 +42,7 @@ void Controller::start(debugTypes debug = NONE) // default debugmode er NONE
 	// T�nder output PB5. Dette er vores data str�m til x.10 protokollen.
 	DDRB |= (1 << PB5);
 
-	this->setDebug(debug);
+	debugMode_ = debug;
 	if (this->debugMode() == COMMAND)
 	{
 		uartDriver_.transmitString("Menu:\r\n");
@@ -59,9 +58,11 @@ void Controller::interrupt()
 	uint8_t nextBit = x10Driver_.getNextBit();
 	x10Driver_.transmit(nextBit);
 
-	// Hvis debugmode er NONE, s� skal vi returnere.
-	if (this->debugMode() == NONE)
+	// Hvis debugmode er AUTO, s� skal vi returnere.
+	if (this->debugMode() == AUTO)
+	{
 		return;
+	}
 
 	// ellers skriver vi til output hvad der er sendt.
 	if (nextBit == 1)
@@ -87,27 +88,11 @@ debugTypes Controller::debugMode()
 void Controller::debugMenu()
 {
 	// Hvis debugmode ikke er commands, s� skal vi returnere.
-	if (this->debugMode() != COMMAND || this->debugMode() != SEND)
+	if (this->debugMode() != COMMAND)
 		return;
-
-	char buffer[10];
 
 	if (!x10Driver_.dataReady())
 	{
-		if (this->debugMode() == SEND)
-		{
-			if (numSendt_ < 100)
-			{
-				this->sendCommandToAllWindows('O');
-				numSendt_++;
-
-				sprintf(buffer, "%i", numSendt_);
-				uartDriver_.transmitString("Sendt: ");
-				uartDriver_.transmitString(buffer);
-				uartDriver_.transmitString("\r\n");
-			}
-		}
-
 		uartDriver_.transmitString("\r\n\nKlar til n�ste kommando");
 		switch (uartDriver_.recieve())
 		{
@@ -160,7 +145,7 @@ void Controller::addWindow(uint8_t address[4])
 
 void Controller::sendCommandToAllWindows(char command)
 {
-	if (debugMode_ != NONE)
+	if (debugMode_ != AUTO)
 	{
 		uartDriver_.transmitString("\r\nSENDER ");
 		uartDriver_.transmit(command);

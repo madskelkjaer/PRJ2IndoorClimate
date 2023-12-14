@@ -56,7 +56,7 @@ int main(void)
 				// Hvis vores measurement er under 10% af limits, s� skal vi kun �bne vinduet halvt.
 				controller.windowsHalf();
 			}
-			else if (humidityProcentOff > 10)
+			else if (humidityProcentOff > percentDeviationToHalfOpen)
 			{
 				// Hvis det er mere end 10%, s� �bner vi vinduet helt.
 				controller.windowsOpen();
