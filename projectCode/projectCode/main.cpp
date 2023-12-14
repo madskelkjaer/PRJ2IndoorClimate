@@ -10,17 +10,10 @@ COMMAND - Tillader at sende kommandoer direkte fra terminal
 WATCH - Se hvad sensoren aflï¿½ser og hvad der bliver sendt
 SEND - Sender 100 O kommandoer.
 */
-<<<<<<< HEAD
 #define DEBUG_MODE COMMAND
 
 // Hvor tit skal sensoren mï¿½le vï¿½rdier? Helst over xx sekunder.
 #define MEASURE_EVERY_SECONDS 30
-=======
-#define DEBUG_MODE WATCH
-
-// Hvor tit skal sensoren måle værdier? Helst over xx sekunder.
-#define MEASURE_EVERY_SECONDS 5
->>>>>>> parent of f8d9039 (Sut)
 
 // Interrupt flags.
 volatile uint8_t interruptFlag = 0;
@@ -40,13 +33,8 @@ int main(void)
 
 	// Luftfugtighedssensor driver
 	HumiditySensorDriver humiditySensor;
-<<<<<<< HEAD
 	// Hvad er MAX og MIN vï¿½rdier for hvornï¿½r vinduet skal ï¿½bne?
 	humiditySensor.setMaxValue(50.0);
-=======
-	// Hvad er MAX og MIN værdier for hvornår vinduet skal åbne?
-	humiditySensor.setMaxValue(60.0);
->>>>>>> parent of f8d9039 (Sut)
 	humiditySensor.setMinValue(30.0);
 	const uint8_t percentDeviationToHalfOpen = 10;
 

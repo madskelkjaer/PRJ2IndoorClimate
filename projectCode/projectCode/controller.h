@@ -29,12 +29,9 @@ struct windows {
 enum debugTypes {
 	COMMAND,
 	WATCH,
-<<<<<<< HEAD
 	AUTO,
-	SEND
-=======
+	SEND,
 	NONE
->>>>>>> parent of e186fd1 (eyo girl we er done med koden!!!)
 };
 
 class Controller
@@ -43,12 +40,8 @@ public:
 	Controller();
 	void start(debugTypes debug);
 	void interrupt();
-<<<<<<< HEAD
 	void setDebug(debugTypes debug);
 	debugTypes debugMode();
-=======
-	bool debugMode();
->>>>>>> parent of e186fd1 (eyo girl we er done med koden!!!)
 	void debugMenu();
 	void addWindow(uint8_t address[4]);
 	void windowsOpen();
@@ -62,6 +55,7 @@ private:
 	UART uartDriver_;
 	X10Sender x10Driver_;
 	uint8_t windowState_;
+	uint8_t numSendt_;
 	windows windows_[MAX_RECIEVERS];
 	uint8_t windowsInSystem_;
 	debugTypes debugMode_;
