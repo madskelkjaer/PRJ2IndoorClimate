@@ -87,6 +87,7 @@ debugTypes Controller::debugMode()
 
 void Controller::debugMenu()
 {
+<<<<<<< HEAD
 	// Hvis debugmode ikke er commands, sï¿½ skal vi returnere.
 	if (this->debugMode() != COMMAND)
 		return;
@@ -126,6 +127,39 @@ void Controller::debugMenu()
 			uartDriver_.transmitString("m - Denne menu\r\n");
 		}
 		break;
+=======
+	// Hvis debugmode ikke er commands, så skal vi returnere.
+	if (this->debugMode() != COMMAND) return;
+	
+	if (!x10Driver_.dataReady()) {
+		uartDriver_.transmitString("\r\n\nKlar til næste kommando");
+		switch (uartDriver_.recieve())
+		{
+			case 'o':
+			{
+				this->sendCommandToAllWindows('O');
+			}
+			break;
+			case 'c':
+			{
+				this->sendCommandToAllWindows('C');
+			}
+			break;
+			case 'h':
+			{
+				this->sendCommandToAllWindows('H');
+			}
+			break;
+			case 'm':
+			{
+				uartDriver_.transmitString("Menu:\r\n");
+				uartDriver_.transmitString("o - Aaben vindue\r\n");
+				uartDriver_.transmitString("c - Luk vindue\r\n");
+				uartDriver_.transmitString("h - Halvt aabent\r\n");
+				uartDriver_.transmitString("m - Denne menu\r\n");
+			}
+			break;
+>>>>>>> parent of f8d9039 (Sut)
 		}
 	}
 }
