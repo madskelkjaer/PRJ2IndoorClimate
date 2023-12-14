@@ -12,13 +12,13 @@
 
 class LedDriver
 {
-	public:
+public:
 	LedDriver();
 	void LEDopen();
 	void LEDhalf();
 	void LEDclosed();
-	protected:
-	private:
+protected:
+private:
 }; //LedDriver
 
 #endif //__LEDDRIVER_H__

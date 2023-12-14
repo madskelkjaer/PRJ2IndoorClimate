@@ -26,9 +26,9 @@ Discarded input sections
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
- .text          0x00000000        0x0 Utils/LedDriver.o
- .data          0x00000000        0x0 Utils/LedDriver.o
- .bss           0x00000000        0x0 Utils/LedDriver.o
+ .text          0x00000000        0x0 Utils/LEDDriver.o
+ .data          0x00000000        0x0 Utils/LEDDriver.o
+ .bss           0x00000000        0x0 Utils/LEDDriver.o
  .text          0x00000000        0x0 Utils/UART.o
  .data          0x00000000        0x0 Utils/UART.o
  .bss           0x00000000        0x0 Utils/UART.o
@@ -123,7 +123,7 @@ Linker script and memory map
 Address of section .data set to 0x800200
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
 LOAD main.o
-LOAD Utils/LedDriver.o
+LOAD Utils/LEDDriver.o
 LOAD Utils/UART.o
 LOAD Utils/X10Modtager.o
 START GROUP
@@ -360,7 +360,6 @@ END GROUP
                 0x00000250       0x2a main.o
                 0x00000250                __vector_5
  .text._ZN9LedDriverC2Ev
-<<<<<<< HEAD
                 0x0000027a        0x2 Utils/LEDDriver.o
                 0x0000027a                _ZN9LedDriverC1Ev
                 0x0000027a                _ZN9LedDriverC2Ev
@@ -373,20 +372,6 @@ END GROUP
  .text._ZN9LedDriver9LEDclosedEv
                 0x000002a4       0x14 Utils/LEDDriver.o
                 0x000002a4                _ZN9LedDriver9LEDclosedEv
-=======
-                0x00000286        0x2 Utils/LedDriver.o
-                0x00000286                _ZN9LedDriverC1Ev
-                0x00000286                _ZN9LedDriverC2Ev
- .text._ZN9LedDriver7LEDopenEv
-                0x00000288       0x14 Utils/LedDriver.o
-                0x00000288                _ZN9LedDriver7LEDopenEv
- .text._ZN9LedDriver7LEDhalfEv
-                0x0000029c       0x14 Utils/LedDriver.o
-                0x0000029c                _ZN9LedDriver7LEDhalfEv
- .text._ZN9LedDriver9LEDclosedEv
-                0x000002b0       0x14 Utils/LedDriver.o
-                0x000002b0                _ZN9LedDriver9LEDclosedEv
->>>>>>> parent of e186fd1 (eyo girl we er done med koden!!!)
  .text._ZN4UARTC2Ev
                 0x000002b8       0x12 Utils/UART.o
                 0x000002b8                _ZN4UARTC1Ev
@@ -540,7 +525,7 @@ END GROUP
  *(.comment)
  .comment       0x00000000       0x30 main.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x31 Utils/LedDriver.o
+ .comment       0x00000030       0x31 Utils/LEDDriver.o
  .comment       0x00000030       0x31 Utils/UART.o
  .comment       0x00000030       0x31 Utils/X10Modtager.o
  .comment       0x00000030       0x31 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(sprintf.o)
@@ -573,7 +558,7 @@ END GROUP
  .debug_aranges
                 0x00000000       0x28 main.o
  .debug_aranges
-                0x00000028       0x38 Utils/LedDriver.o
+                0x00000028       0x38 Utils/LEDDriver.o
  .debug_aranges
                 0x00000060       0x40 Utils/UART.o
  .debug_aranges
@@ -585,52 +570,31 @@ END GROUP
 .debug_info     0x00000000     0x1c67
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0xbbc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
-<<<<<<< HEAD
  .debug_info    0x00000bbc      0x6ee main.o
  .debug_info    0x000012aa      0x1a9 Utils/LEDDriver.o
  .debug_info    0x00001453      0x2bc Utils/UART.o
  .debug_info    0x0000170f      0x558 Utils/X10Modtager.o
-=======
- .debug_info    0x00000bbc      0x729 main.o
- .debug_info    0x000012e5      0x1a9 Utils/LedDriver.o
- .debug_info    0x0000148e      0x2bc Utils/UART.o
- .debug_info    0x0000174a      0x558 Utils/X10Modtager.o
->>>>>>> parent of e186fd1 (eyo girl we er done med koden!!!)
 
 .debug_abbrev   0x00000000     0x12c0
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0xb1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
-<<<<<<< HEAD
  .debug_abbrev  0x00000b1a      0x27e main.o
  .debug_abbrev  0x00000d98       0xf5 Utils/LEDDriver.o
  .debug_abbrev  0x00000e8d      0x1bf Utils/UART.o
  .debug_abbrev  0x0000104c      0x274 Utils/X10Modtager.o
-=======
- .debug_abbrev  0x00000b1a      0x299 main.o
- .debug_abbrev  0x00000db3       0xf5 Utils/LedDriver.o
- .debug_abbrev  0x00000ea8      0x1bf Utils/UART.o
- .debug_abbrev  0x00001067      0x274 Utils/X10Modtager.o
->>>>>>> parent of e186fd1 (eyo girl we er done med koden!!!)
 
 .debug_line     0x00000000      0x8c1
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1fa C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
-<<<<<<< HEAD
  .debug_line    0x000001fa      0x240 main.o
  .debug_line    0x0000043a       0xb9 Utils/LEDDriver.o
  .debug_line    0x000004f3      0x10d Utils/UART.o
  .debug_line    0x00000600      0x2c1 Utils/X10Modtager.o
-=======
- .debug_line    0x000001fa      0x24c main.o
- .debug_line    0x00000446       0xb9 Utils/LedDriver.o
- .debug_line    0x000004ff      0x10d Utils/UART.o
- .debug_line    0x0000060c      0x2c1 Utils/X10Modtager.o
->>>>>>> parent of e186fd1 (eyo girl we er done med koden!!!)
 
 .debug_frame    0x00000000      0x20c
  *(.debug_frame)
  .debug_frame   0x00000000       0x58 main.o
- .debug_frame   0x00000058       0x54 Utils/LedDriver.o
+ .debug_frame   0x00000058       0x54 Utils/LEDDriver.o
  .debug_frame   0x000000ac       0xa0 Utils/UART.o
  .debug_frame   0x0000014c       0xc0 Utils/X10Modtager.o
 
@@ -639,7 +603,7 @@ END GROUP
  .debug_str     0x00000000      0x3e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_str     0x000003e6      0x51f main.o
                                 0x564 (size before relaxing)
- .debug_str     0x00000905       0x2e Utils/LedDriver.o
+ .debug_str     0x00000905       0x2e Utils/LEDDriver.o
                                 0x22e (size before relaxing)
  .debug_str     0x00000933       0x43 Utils/UART.o
                                 0x274 (size before relaxing)
@@ -649,7 +613,7 @@ END GROUP
 .debug_loc      0x00000000      0x773
  *(.debug_loc)
  .debug_loc     0x00000000      0x15a main.o
- .debug_loc     0x0000015a       0x72 Utils/LedDriver.o
+ .debug_loc     0x0000015a       0x72 Utils/LEDDriver.o
  .debug_loc     0x000001cc      0x22c Utils/UART.o
  .debug_loc     0x000003f8      0x37b Utils/X10Modtager.o
 
@@ -674,7 +638,7 @@ END GROUP
 .debug_ranges   0x00000000       0xf0
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x18 main.o
- .debug_ranges  0x00000018       0x28 Utils/LedDriver.o
+ .debug_ranges  0x00000018       0x28 Utils/LEDDriver.o
  .debug_ranges  0x00000040       0x30 Utils/UART.o
  .debug_ranges  0x00000070       0x80 Utils/X10Modtager.o
 

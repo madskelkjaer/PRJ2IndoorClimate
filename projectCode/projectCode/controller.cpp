@@ -13,7 +13,7 @@ Controller::Controller()
 	windowsInSystem_ = 0;
 }
 
-void Controller::start(debugTypes debug = NONE) // default debugmode er NONE
+void Controller::start(debugTypes debug = AUTO) // default debugmode er AUTO
 {
 	cli();
 	// t�nder interrupts.

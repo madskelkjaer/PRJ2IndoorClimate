@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000208  00000000  00000000  00001934  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00003db7  00000000  00000000  00001b3c  2**0
+  6 .debug_info   00003d9f  00000000  00000000  00001b3c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001ac2  00000000  00000000  000058f3  2**0
+  7 .debug_abbrev 00001ac2  00000000  00000000  000058db  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001195  00000000  00000000  000073b5  2**0
+  8 .debug_line   00001195  00000000  00000000  0000739d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000568  00000000  00000000  0000854c  2**2
+  9 .debug_frame  00000568  00000000  00000000  00008534  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000121a  00000000  00000000  00008ab4  2**0
+ 10 .debug_str    00001210  00000000  00000000  00008a9c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000144d  00000000  00000000  00009cce  2**0
+ 11 .debug_loc    0000144d  00000000  00000000  00009cac  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000001b0  00000000  00000000  0000b11b  2**0
+ 12 .debug_ranges 000001b0  00000000  00000000  0000b0f9  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -269,7 +269,7 @@ debugTypes Controller::debugMode()
 	windowsInSystem_ = 0;
 }
 
-void Controller::start(debugTypes debug = NONE) // default debugmode er NONE
+void Controller::start(debugTypes debug = AUTO) // default debugmode er AUTO
 {
      172:	cf 93       	push	r28
      174:	df 93       	push	r29

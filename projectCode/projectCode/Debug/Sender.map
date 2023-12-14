@@ -889,16 +889,16 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x3db7
+.debug_info     0x00000000     0x3d9f
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0xbbc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_info    0x00000bbc      0x595 Classes/HumiditySensorDriver.o
- .debug_info    0x00001151      0xd5c controller.o
- .debug_info    0x00001ead      0x959 main.o
- .debug_info    0x00002806      0x259 Utils/I2C.o
- .debug_info    0x00002a5f      0x9bf Utils/SDC30.o
- .debug_info    0x0000341e      0x2bc Utils/UART.o
- .debug_info    0x000036da      0x6dd Utils/X10Sender.o
+ .debug_info    0x00001151      0xd50 controller.o
+ .debug_info    0x00001ea1      0x94d main.o
+ .debug_info    0x000027ee      0x259 Utils/I2C.o
+ .debug_info    0x00002a47      0x9bf Utils/SDC30.o
+ .debug_info    0x00003406      0x2bc Utils/UART.o
+ .debug_info    0x000036c2      0x6dd Utils/X10Sender.o
 
 .debug_abbrev   0x00000000     0x1ac2
  *(.debug_abbrev)
@@ -932,22 +932,22 @@ END GROUP
  .debug_frame   0x000003ec       0xa0 Utils/UART.o
  .debug_frame   0x0000048c       0xdc Utils/X10Sender.o
 
-.debug_str      0x00000000     0x121a
+.debug_str      0x00000000     0x1210
  *(.debug_str)
  .debug_str     0x00000000      0x3e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega2560/avr6/crtatmega2560.o
  .debug_str     0x000003e6      0x5e3 Classes/HumiditySensorDriver.o
                                 0x62c (size before relaxing)
- .debug_str     0x000009c9      0x58b controller.o
-                                0x750 (size before relaxing)
- .debug_str     0x00000f54       0xb6 main.o
-                                0x8a9 (size before relaxing)
- .debug_str     0x0000100a       0x22 Utils/I2C.o
+ .debug_str     0x000009c9      0x581 controller.o
+                                0x746 (size before relaxing)
+ .debug_str     0x00000f4a       0xb6 main.o
+                                0x89f (size before relaxing)
+ .debug_str     0x00001000       0x22 Utils/I2C.o
                                 0x238 (size before relaxing)
- .debug_str     0x0000102c      0x100 Utils/SDC30.o
+ .debug_str     0x00001022      0x100 Utils/SDC30.o
                                 0x448 (size before relaxing)
- .debug_str     0x0000112c       0x3e Utils/UART.o
+ .debug_str     0x00001122       0x3e Utils/UART.o
                                 0x277 (size before relaxing)
- .debug_str     0x0000116a       0xb0 Utils/X10Sender.o
+ .debug_str     0x00001160       0xb0 Utils/X10Sender.o
                                 0x4bb (size before relaxing)
 
 .debug_loc      0x00000000     0x144d

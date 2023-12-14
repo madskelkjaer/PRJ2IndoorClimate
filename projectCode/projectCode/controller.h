@@ -29,9 +29,7 @@ struct windows {
 enum debugTypes {
 	COMMAND,
 	WATCH,
-	AUTO,
-	SEND,
-	NONE
+	AUTO
 };
 
 class Controller
